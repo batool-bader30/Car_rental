@@ -2,6 +2,7 @@ import 'package:carrental/controllers/user_controller.dart';
 import 'package:carrental/utils/constant/assets.dart';
 import 'package:carrental/utils/constant/network_connection.dart';
 import 'package:carrental/utils/navigator_utils.dart';
+import 'package:carrental/view/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -50,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (uid == null) {
       NavigatorUtils.navigateToSignUpsScreen(context);
     } else {
-      NavigatorUtils.page(context);
+      NavigatorUtils.navigateToHomeScreen(context);
     }
   }
 
