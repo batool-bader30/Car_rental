@@ -1,6 +1,8 @@
 import 'package:carrental/controllers/car_provider.dart';
 import 'package:carrental/models/car_model.dart';
+import 'package:carrental/utils/constant/app_color.dart';
 import 'package:carrental/view/widgets/car_item.dart';
+import 'package:carrental/view/widgets/icons_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,7 +19,7 @@ class HomeScreen extends StatelessWidget {
 
 
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: AppColor.primary,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
@@ -27,19 +29,7 @@ class HomeScreen extends StatelessWidget {
               // TOP ROW
               Row(
                 children: [
-                  Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: Colors.grey.withValues(alpha: 0.4),
-                        width: 2,
-                      ),
-                      color: Colors.white.withValues(alpha: 0.4),
-                    ),
-                    child: Center(child: Icon(Icons.menu)),
-                  ),
+                  IconWidget(icon: Icons.menu,),
 
                   Spacer(),
 
@@ -104,3 +94,4 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+

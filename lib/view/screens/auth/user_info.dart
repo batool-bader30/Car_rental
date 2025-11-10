@@ -100,7 +100,7 @@ class userinfo extends StatelessWidget {
                                     name: namecontroller.text,
                                     phoneNumber: phonecontroller.text,
                                   );
-                                   NavigatorUtils.page(context);
+                                   NavigatorUtils.navigateToHomeScreen(context);
                                 }
                               },
                             ),
