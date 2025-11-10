@@ -119,7 +119,7 @@ class SigninPage extends StatelessWidget {
                                   );
 
                                   if (success) {
-                                    NavigatorUtils.page(context);
+                                    NavigatorUtils.navigateToHomeScreen(context);
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
