@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider<CarProvider>(create: (context) => CarProvider()),
         ChangeNotifierProvider<UserController>(
           create: (context) {
             final controller = UserController();
