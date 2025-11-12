@@ -1,6 +1,7 @@
 import 'package:carrental/controllers/user_controller.dart';
 import 'package:carrental/firebase_options.dart';
 import 'package:carrental/utils/stripe_payment/stripe_keys.dart';
+import 'package:carrental/view/screens/Payment/paymentMethod_screen.dart';
 import 'package:carrental/view/screens/auth/signup_page.dart';
 import 'package:carrental/view/screens/page.dart';
 import 'package:carrental/view/screens/splash_screen.dart';
@@ -49,7 +50,7 @@ class MyApp extends StatelessWidget {
             home: child,
           );
         },
-        child: page(),
+        child: PaymentmethodScreen(),
       ),
     );
   }

@@ -8,14 +8,14 @@ import 'package:carrental/view/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class PaymentmethodScreen extends StatefulWidget {
-  const PaymentmethodScreen({super.key});
+class PaymenScreen extends StatefulWidget {
+  const PaymenScreen({super.key});
 
   @override
-  State<PaymentmethodScreen> createState() => _PaymentmethodScreenState();
+  State<PaymenScreen> createState() => _PaymenScreenState();
 }
 
-class _PaymentmethodScreenState extends State<PaymentmethodScreen> {
+class _PaymenScreenState extends State<PaymenScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -44,7 +44,7 @@ class _PaymentmethodScreenState extends State<PaymentmethodScreen> {
                 Align(
                   alignment: Alignment.topLeft,
                   child: SmallText(
-                    text: "Payment methods",
+                    text: "Add New Card",
                     color: Colors.black,
                     fontWeight: FontWeight.w500,
                     size: 22,

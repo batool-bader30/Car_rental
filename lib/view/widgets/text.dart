@@ -26,6 +26,7 @@ class MediumText extends StatelessWidget {
   final Color? color;
   final FontWeight? fontWeight;
   
+  
 
   const MediumText({
     super.key,
