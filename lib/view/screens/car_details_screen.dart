@@ -1,4 +1,6 @@
 import 'package:carrental/models/car_model.dart';
+import 'package:carrental/utils/navigator_utils.dart';
+import 'package:carrental/view/widgets/button.dart';
 import 'package:carrental/view/widgets/icons_widget.dart';
 import 'package:carrental/view/widgets/overview_widget.dart';
 
@@ -14,6 +16,7 @@ class CarDetailsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
+        bottom: false,
         child: ListView(
           padding: EdgeInsets.all(16),
           children: [
@@ -103,6 +106,7 @@ class CarDetailsScreen extends StatelessWidget {
                       Text("\$${car.price}/Day",
                       style: TextStyle(color: Colors.white,fontSize: 22,fontWeight: FontWeight.bold),),
 
+                      
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.orangeAccent,
@@ -115,7 +119,9 @@ class CarDetailsScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(14)
                           ),
                         ),
-                        onPressed: (){}, child: Text("Book Car",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),))
+                        onPressed: (){
+                          NavigatorUtils.navigateToDateTimeScreen(context,car);
+                        }, child: Text("Book Car",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),))
                     ],
                   ),
                   
