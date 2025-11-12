@@ -11,6 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
 
+  
+
   cupertino_icons: ^1.0.8
   connectivity_plus: ^7.0.0
   firebase_core: ^4.2.0
@@ -20,8 +22,12 @@ dependencies:
   firebase_auth: ^6.1.1
   shared_preferences: ^2.5.3
   provider: ^6.1.5+1
+<<<<<<< HEAD
   flutter_stripe: ^12.1.0
   dio: ^5.9.0
+=======
+  intl: ^0.19.0
+>>>>>>> fe0f6c24eda1bc62246f64bb76eab7c7c03d914d
 
 dev_dependencies:
   flutter_test:
