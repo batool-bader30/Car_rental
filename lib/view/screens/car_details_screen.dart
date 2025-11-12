@@ -1,4 +1,5 @@
 import 'package:carrental/models/car_model.dart';
+import 'package:carrental/view/widgets/icons_widget.dart';
 import 'package:carrental/view/widgets/overview_widget.dart';
 
 
@@ -21,37 +22,13 @@ class CarDetailsScreen extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () => Navigator.pop(context),
-                  child: Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: Colors.grey.withValues(alpha: 0.4),
-                        width: 2,
-                      ),
-                      color: Colors.white.withValues(alpha: 0.4),
-                    ),
-                    child: Center(child: Icon(Icons.arrow_back)),
-                  ),
+                  child: IconWidget(icon: Icons.arrow_back)
                 ),
                 Text(
                   "Car Details",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: Colors.grey.withValues(alpha: 0.4),
-                      width: 2,
-                    ),
-                    color: Colors.white.withValues(alpha: 0.4),
-                  ),
-                  child: Center(child: Icon(Icons.favorite_border)),
-                ),
+                IconWidget(icon: Icons.favorite_border)
               ],
             ),
             SizedBox(height: 20),
