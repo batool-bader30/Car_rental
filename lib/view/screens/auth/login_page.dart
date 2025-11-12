@@ -111,7 +111,7 @@ class SigninPage extends StatelessWidget {
                             SizedBox(height: 30.sp),
                             Button(
                               title: "sign in",
-                              ontap: () async {
+                              ontap: () async {         
                                 if (_formKey.currentState!.validate()) {
                                   bool success = await ctrl.login(
                                     emailcontroller.text,
@@ -119,7 +119,7 @@ class SigninPage extends StatelessWidget {
                                   );
 
                                   if (success) {
-                                    NavigatorUtils.page(context);
+                                    NavigatorUtils.navigateToHomeScreen(context);
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(

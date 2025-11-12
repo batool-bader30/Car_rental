@@ -1,10 +1,13 @@
 import 'package:carrental/controllers/user_controller.dart';
 import 'package:carrental/firebase_options.dart';
+import 'package:carrental/utils/stripe_payment/stripe_keys.dart';
 import 'package:carrental/view/screens/auth/signup_page.dart';
+import 'package:carrental/view/screens/page.dart';
 import 'package:carrental/view/screens/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:provider/provider.dart';
 import 'package:carrental/controllers/car_provider.dart';
 
@@ -16,7 +19,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
+Stripe.publishableKey=ApiKeys.Publishablekey;
   // تشغيل التطبيق
   runApp(const MyApp());
 }
@@ -32,7 +35,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<UserController>(
           create: (context) {
             final controller = UserController();
-            controller.getinfo(); // تحميل بيانات المستخدم مباشرة عند إنشاء ال Provider
+            controller.getinfo();
             return controller;
           },
         ),
@@ -46,7 +49,7 @@ class MyApp extends StatelessWidget {
             home: child,
           );
         },
-        child: SplashScreen(),
+        child: page(),
       ),
     );
   }
