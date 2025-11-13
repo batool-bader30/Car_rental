@@ -1,24 +1,24 @@
-import 'package:carrental/models/booking_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../models/car_model.dart';
+import '../models/booking_model.dart';
 
 class BookingProvider with ChangeNotifier {
-  bool isLoading =false;
+  bool isLoading = false;
 
   Future<void> addBooking(BookingModel booking) async {
     try {
-      var isLoading=true;
+      isLoading = true;
       notifyListeners();
 
-      await FirebaseFirestore.instance.collection("bookings").add(booking.toMap());
-
+      await FirebaseFirestore.instance
+          .collection('bookings')
+          .add(booking.toMap());
+    } catch (e, st) {
+      debugPrint('addBooking error: $e\n$st');
+      rethrow;
+    } finally {
+      isLoading = false;
       notifyListeners();
-      isLoading=false;
-    } catch (e) {
-      isLoading=false;
-      notifyListeners();
-      throw Exception("Error adding booking:$e");
     }
   }
 }

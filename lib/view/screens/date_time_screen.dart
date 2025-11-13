@@ -1,6 +1,9 @@
 import 'package:carrental/controllers/booking_provider.dart';
+import 'package:carrental/models/booking_model.dart';
 import 'package:carrental/models/car_model.dart';
 import 'package:carrental/utils/constant/app_color.dart';
+import 'package:carrental/utils/validations/exptions%20(1).dart';
+import 'package:carrental/view/widgets/button.dart';
 import 'package:carrental/view/widgets/icons_widget.dart';
 import 'package:carrental/view/widgets/text_field.dart';
 import 'package:flutter/material.dart' hide TextField;
@@ -17,8 +20,6 @@ class DateTimeScreen extends StatefulWidget {
 }
 
 class _DateTimeScreenState extends State<DateTimeScreen> {
-  //final TextEditingController dateController = TextEditingController();
-  //final TextEditingController timeController = TextEditingController();
   final TextEditingController hoursController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
@@ -106,9 +107,23 @@ class _DateTimeScreenState extends State<DateTimeScreen> {
             SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.all(10),
-              child: Text(
-                widget.car.name,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    widget.car.name,
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+
+                  Text(
+                    "\$${widget.car.price}/Day",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
             ),
             SizedBox(height: 20),
@@ -169,142 +184,103 @@ class _DateTimeScreenState extends State<DateTimeScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 20,),
-                        Text("Time",
-                        style: TextStyle(
+                        SizedBox(height: 20),
+                        Text(
+                          "Time",
+                          style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
-                          ),),
-                          Row(
-                            children: [
-                              Expanded(
-                                flex: 2,
-                                child: GestureDetector(
-                                  onTap: _pickTime,
-                                  child: Container(
-
-                                     height: 55,
-                                     decoration: BoxDecoration(
-                                      color: Colors.grey[900],
-                                      borderRadius: BorderRadius.circular(10),
-                                      border: Border.all(color: Colors.grey),),
-                              child: Row(
-                                children: [
-                                  SizedBox(width: 16),
-                                  Icon(
-                                    Icons.calendar_month_outlined,
-                                    color: AppColor.primary,
-                                  ),
-                                  SizedBox(width: 12),
-                                  Text(
-                                    selectedDate == null
-                                        ? "Enter Date"
-                                        : DateFormat(
-                                            'yyyy-MM-dd',
-                                          ).format(selectedDate!),
-                                    style: TextStyle(color: AppColor.primary),
-                                  ),
-                                ],
-                              ),
                           ),
                         ),
+                        SizedBox(height: 20),
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: GestureDetector(
+                                onTap: _pickTime,
+                                child: Container(
+                                  height: 55,
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey[900],
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(color: Colors.grey),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      SizedBox(width: 16),
+                                      Icon(
+                                        Icons.access_time,
+                                        color: AppColor.primary,
+                                      ),
+                                      SizedBox(width: 12),
+                                      Text(
+                                        selectedTime == null
+                                            ? "Enter Time"
+                                            : selectedTime!.format(context),
+                                        style: TextStyle(
+                                          color: AppColor.primary,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
-                            ],
-                          )
-                        
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 20),
+                        Text(
+                          "Total Hours",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        HourstTextField(hoursController: hoursController),
+                        SizedBox(height: 50),
+                        Button(
+                          title: "Next",
+                          ontap: () async {
+                            if (_formKey.currentState!.validate() &&
+                                selectedDate != null &&
+                                selectedTime != null) {
+                              final booking = BookingModel(
+                                carName: widget.car.name,
+
+                                date: DateFormat('yyyy-MM-dd').format(selectedDate!),
+                                time: selectedTime!.format(context),
+                                hours: int.parse(hoursController.text),
+                              );
+
+                              await Provider.of<BookingProvider>(
+                                context,
+                                listen: false,
+                              ).addBooking(booking);
+
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text("Booking saved successfully!"),
+                                ),
+                              );
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text("Please fill all fields"),
+                                ),
+                              );
+                            }
+                          },
+                        ),
                       ],
                     ),
                   ),
                 ),
               ),
             ),
-
-            //date field
-            //Text("Date",style: TextStyle(color: AppColor.primary),),
-
-            // Expanded(
-            //   child: Align(
-            //     alignment: Alignment.bottomCenter,
-            //     child: Container(
-            //       width: MediaQuery.sizeOf(context).width,
-            //       padding: EdgeInsets.all(20),
-            //       decoration: BoxDecoration(
-            //         color: Colors.black,
-            //         borderRadius: BorderRadius.only(
-            //           topLeft: Radius.circular(30),
-            //           topRight: Radius.circular(30),
-            //         ),
-            //       ),
-            //       child: SingleChildScrollView(
-            //         child: Column(
-            //           crossAxisAlignment: CrossAxisAlignment.start,
-            //           children: [
-            //             SizedBox(height: 10),
-            //             Text(
-            //               "Date ",
-            //               style: TextStyle(
-            //                 fontSize: 18,
-            //                 fontWeight: FontWeight.bold,
-            //                 color: Colors.white,
-            //               ),
-            //             ),
-
-            //             SizedBox(height: 12),
-            //             TextField(
-            //               controller: dateController,
-            //               labelText: "Enter Date",
-            //               prefixIcon: Icon(Icons.calendar_today),
-            //             ),
-            //             SizedBox(height: 16),
-
-            //             Row(
-            //               children: [
-            //                 Expanded(
-            //                   child: MyTextField(
-            //                     labelText: "Enter Time",
-            //                     controller: timeController,
-            //                     prefixIcon: Icon(Icons.access_time),
-            //                   ),
-            //                 ),
-            //                 SizedBox(height: 16),
-            //                 Container(
-            //                   padding: EdgeInsets.symmetric(horizontal: 12),
-            //                   decoration: BoxDecoration(
-            //                     color: Colors.white,
-            //                     borderRadius: BorderRadius.circular(12),
-            //                     border: Border.all(color: Colors.grey),
-            //                   ),
-            //                   child: DropdownButton(
-            //                     value: amPmValue,
-            //                     underline: SizedBox(),
-
-            //                     items: [
-            //                       DropdownMenuItem(
-            //                         value: "AM",
-            //                         child: Text("AM"),
-            //                       ),
-            //                       DropdownMenuItem(
-            //                         value: "BM",
-            //                         child: Text("BM"),
-            //                       ),
-            //                     ],
-
-            //                     onChanged: (V) {
-            //                       setState(() {
-            //                         amPmValue = V!;
-            //                       });
-            //                     },
-            //                   ),
-            //                 ),
-            //               ],
-            //             ),
-            //           ],
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // ),
           ],
         ),
       ),
