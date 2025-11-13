@@ -21,6 +21,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColor.primary,
       body: SafeArea(
+        
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: Column(
