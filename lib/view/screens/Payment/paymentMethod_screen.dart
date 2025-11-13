@@ -1,6 +1,7 @@
 import 'package:carrental/controllers/patment_provider.dart';
 import 'package:carrental/utils/constant/app_color.dart';
 import 'package:carrental/utils/constant/assets.dart';
+import 'package:carrental/utils/stripe_payment/payment_manage.dart';
 import 'package:carrental/view/screens/Payment/widget.dart';
 import 'package:carrental/view/widgets/button.dart';
 import 'package:carrental/view/widgets/icons_widget.dart';
@@ -52,14 +53,19 @@ class _PaymentmethodScreenState extends State<PaymentmethodScreen> {
                 ),
                 SizedBox(height: 20),
                 Image.asset(Assets.visa),
-                                SizedBox(height: 20),
+                SizedBox(height: 20),
 
                 PaymentMethodsScreen(),
-                SizedBox(height: 50,),
-                                SmallText(text: "Amount to pay: 2100JD ",size: 20,),
+                SizedBox(height: 50),
+                SmallText(text: "Amount to pay: 2100JD ", size: 20),
 
                 Spacer(),
-                Button(title: "Proceed to Payment", ontap: () {}),
+                Button(
+                  title: "Proceed to Payment",
+                  ontap: () {
+                    PaymentManager.makePayment(40, "usd");
+                  },
+                ),
               ],
             ),
           ),
