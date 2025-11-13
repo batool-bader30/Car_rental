@@ -1,3 +1,4 @@
+import 'package:carrental/controllers/booking_provider.dart';
 import 'package:carrental/controllers/user_controller.dart';
 import 'package:carrental/firebase_options.dart';
 import 'package:carrental/view/screens/auth/signup_page.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider<BookingProvider>(create: (context) => BookingProvider()),
         ChangeNotifierProvider<CarProvider>(create: (context) => CarProvider()),
         ChangeNotifierProvider<UserController>(
           create: (context) {

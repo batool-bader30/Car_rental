@@ -1,56 +1,49 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class BookingModel {
-  final String id;
-  final String carId;
+  final String? id;
+  //final String carId;
   final String carName;
-  final String date;
-
-  final String time;
-  final String amPm;
-  final String hours;
-  final double pricePerDay;
-  final DateTime createAt;
+  final String date;       // 'yyyy-MM-dd'
+  final String time;       // 'hh:mm'
+  //final String amPm;       // 'AM' or 'PM'
+  final int hours;
+  //final double pricePerDay;
 
   BookingModel({
-    required this.carId,
-    required this.id,
+    this.id,
+    //required this.carId,
     required this.carName,
     required this.date,
-
     required this.time,
-    required this.amPm,
+    
     required this.hours,
-    required this.pricePerDay,
-    required this.createAt,
+    //required this.pricePerDay,
   });
 
   factory BookingModel.fromMap(Map<String, dynamic> data, String id) {
     return BookingModel(
       id: id,
-      carId: data['carId'] ?? '',
+      //carId: data['carId'] ?? '',
       carName: data['carName'] ?? '',
       date: data['date'] ?? '',
       time: data['time'] ?? '',
-      amPm: data['amPm'] ?? '',
-      hours: data['hours'] ?? 0,
-      pricePerDay: data['pricePerDay'] != null
-          ? data['pricePerDay'].toDouble()
-          : 0.0,
-      createAt: (data['createAt'] as Timestamp).toDate(),
+      //amPm: data['amPm'] ?? '',
+      hours: (data['hours'] ?? 0) is int ? (data['hours'] ?? 0) : int.tryParse('${data['hours']}') ?? 0,
+      //pricePerDay: (data['pricePerDay'] is num) ? (data['pricePerDay'] as num).toDouble() : 0.0,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      "carId": carId,
-      "carName": carName,
-      "date": date,
-      "time": time,
-      "amPm": amPm,
-      "hours": hours,
-      "pricePerDay": pricePerDay,
-      "createAt":createAt,
+      //'carId': carId,
+      'carName': carName,
+      'date': date,
+      'time': time,
+      //'amPm': amPm,
+      'hours': hours,
+      
+      
     };
   }
 }

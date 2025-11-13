@@ -1,4 +1,5 @@
 import 'package:carrental/utils/constant/app_color.dart';
+import 'package:carrental/utils/validations/exptions%20(1).dart';
 import 'package:flutter/material.dart';
 
 class MyTextField extends StatelessWidget {
@@ -115,3 +116,50 @@ final Widget? sufixicon;
     );
   }
 }
+
+class HourstTextField extends StatelessWidget {
+  const HourstTextField({
+    super.key,
+    required this.hoursController,
+  });
+
+  final TextEditingController hoursController;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: hoursController,
+      keyboardType: TextInputType.number,
+      style: TextStyle(color: AppColor.primary),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return "Please enter number of hours";
+        } else if (!RegExp(
+          RegExption.onlyNumber,
+        ).hasMatch(value)) {
+          return "Numbers only";
+        }
+        return null;
+      },
+      decoration: InputDecoration(
+        prefixIcon: Icon(
+          Icons.hourglass_empty,
+          color: AppColor.primary,
+        ),
+        hintStyle: TextStyle(color: AppColor.primary),
+        hintText: "Enter Hours",
+        filled: true,
+        fillColor: Colors.grey[900],
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.grey),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.amberAccent),
+        ),
+      ),
+    );
+  }
+}
+
