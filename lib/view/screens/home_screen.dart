@@ -1,6 +1,7 @@
 import 'package:carrental/controllers/car_provider.dart';
 import 'package:carrental/models/car_model.dart';
 import 'package:carrental/utils/constant/app_color.dart';
+import 'package:carrental/view/widgets/bottom_nav.dart';
 import 'package:carrental/view/widgets/car_item.dart';
 import 'package:carrental/view/widgets/icons_widget.dart';
 import 'package:flutter/material.dart';
@@ -12,16 +13,15 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var carProvider = Provider.of<CarProvider>(context);
-    List<CarModel> cars =carProvider.cars;
+    List<CarModel> cars = carProvider.cars;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       carProvider.fetchCars();
-});
-
+    });
 
     return Scaffold(
+      bottomNavigationBar: CustomBottomNavBar(selectedIndex: 0),
       backgroundColor: AppColor.primary,
       body: SafeArea(
-        
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: Column(
@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
               // TOP ROW
               Row(
                 children: [
-                  IconWidget(icon: Icons.menu,),
+                  IconWidget(icon: Icons.menu),
 
                   Spacer(),
 
@@ -68,31 +68,41 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 20,),
+              SizedBox(height: 20),
               Text(
                 "Available Cars",
-                style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
-              SizedBox(height: 12,),
-              
+              SizedBox(height: 12),
+
               Expanded(
-                child:ListView.builder(
-                  itemCount:cars.length ,
+                child: ListView.builder(
+                  itemCount: cars.length,
                   itemBuilder: (context, index) {
-                    var car =carProvider.cars[index];
+                    var car = carProvider.cars[index];
                     return Padding(
                       padding: EdgeInsets.only(bottom: 12),
-                      child: CarItem(car:cars[index]),
-
-                      );
+                      child: CarItem(car: cars[index]),
+                    );
                   },
-                )
-                 )
+                ),
+              ),
             ],
           ),
         ),
       ),
+      // bottomNavigationBar: CustomBottomNavBar(
+      //   selectedIndex: selectedin,
+      //   onTap: (index) {
+      //     setState(() => selectedIndex = index);
+      //     if (index == 1) {
+      //       Navigator.push(
+      //         context,
+      //         MaterialPageRoute(builder: (_) => FavoritesScreen()),
+      //       );
+      //     }
+      //   },
+      // ),
     );
   }
 }
-
