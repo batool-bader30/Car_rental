@@ -60,7 +60,7 @@ final Widget? sufixicon;
 }
 
 
-class TextField extends StatelessWidget {
+class TextField2 extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final String labelText;
@@ -70,7 +70,7 @@ class TextField extends StatelessWidget {
   final Function(String)? onchanged;
 final Widget? sufixicon;
 
-  const TextField({
+  const TextField2({
     super.key,
     this.controller,
     this.keyboardType,
@@ -91,24 +91,24 @@ final Widget? sufixicon;
         keyboardType: keyboardType,
         decoration: InputDecoration(
           labelText: labelText,
-          labelStyle: TextStyle(color:AppColor.primary),
+          labelStyle: TextStyle(color:Colors.grey,),
           prefixIcon: prefixIcon,
-          prefixIconColor:  AppColor.primary,
+          prefixIconColor:  Colors.grey,
           suffixIcon:sufixicon ,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(borderRadius!),
-            borderSide: const BorderSide(color: Color.fromARGB(106, 249, 249, 249),),
+            borderSide: const BorderSide(color: Color.fromARGB(255, 236, 234, 234),),
           ),
           filled: true,
-          fillColor: Color.fromARGB(106, 249, 249, 249),
+          fillColor: Color.fromARGB(106, 242, 241, 241),
 
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(borderRadius!),
-            borderSide: const BorderSide(color:Color.fromARGB(106, 249, 249, 249),),
+            borderSide: const BorderSide(color:Color.fromARGB(255, 236, 234, 234),),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(borderRadius!),
-            borderSide:  BorderSide(color:Color.fromARGB(106, 249, 249, 249),),
+            borderSide:  BorderSide(color:Color.fromARGB(255, 236, 234, 234),),
           ),
         ),
         validator: validator,

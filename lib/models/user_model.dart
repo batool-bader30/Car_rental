@@ -3,6 +3,8 @@ class UserModel {
   String? email;
   String? phoneNumber;
   String? image;
+    String? gender;
+
 
   // Constructor with named optional parameters
   UserModel({
@@ -10,6 +12,7 @@ class UserModel {
     this.email,
     this.phoneNumber,
     this.image,
+    this.gender
   });
 
   // Create an instance from a JSON map
@@ -19,6 +22,8 @@ class UserModel {
       email: json['email'] as String?,
       phoneNumber: json['phoneNumber'] as String?,
       image: json['image'] as String?,
+            gender: json['gender'] as String?,
+
     );
   }
 
@@ -29,6 +34,7 @@ class UserModel {
       'email': email,
       'phoneNumber': phoneNumber,
       'image': image,
+        'gender': gender,
     };
   }
 }

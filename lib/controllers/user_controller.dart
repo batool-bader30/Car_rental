@@ -3,11 +3,22 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:image_picker/image_picker.dart';
 
 
 class UserController extends ChangeNotifier {
   UserModel? userModel;
+ final ImagePicker _picker = ImagePicker();
 
+  //for image uplod
+  Future<void> pickImageAndSave() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      if (userModel == null) userModel = UserModel(name: '' , email: '');
+      userModel!.image = pickedFile.path;
+      notifyListeners();
+    }
+  }
   /// register
   Future<String?> createUser(String email, String password) async {
     try {
@@ -81,18 +92,20 @@ class UserController extends ChangeNotifier {
   }
 
   /// save user data in firestore
-  Future<void> saveUserData({String? name, String? phoneNumber}) async {
+  Future<void> saveUserData({String? name, String? phoneNumber,String? image,String? gender}) async {
     final String? uid = await getUid();
     if (uid != null) {
       await FirebaseFirestore.instance.collection("users").doc(uid).set({
         "name": name?.trim(),
         "phoneNumber": phoneNumber?.trim(),
+        "image": image?.trim(),
+        "gender":gender?.trim(),
         "lastdate": DateTime.now(),
       }, SetOptions(merge: true));
     }
   }
 
-  void getinfo() async {
+  Future<void> getinfo() async {
     final String? uid = await getUid();
     if (uid != null) {
       var doc = await FirebaseFirestore.instance

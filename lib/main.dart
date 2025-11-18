@@ -10,6 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:provider/provider.dart';
 import 'package:carrental/controllers/car_provider.dart';
+import 'package:carrental/view/screens/myprofile/Profileinfopage.dart';
 
 void main() async {
   // ضمان تهيئة Flutter قبل أي استدعاء Firebase أو async
