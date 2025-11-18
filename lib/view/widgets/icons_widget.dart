@@ -16,8 +16,8 @@ class IconWidget extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: Colors.grey.withValues(alpha: 0.4),
-          width: 2,
+          color: const Color.fromARGB(255, 211, 210, 210).withValues(alpha: 0.4),
+          width: 1.2,
         ),
         color: Colors.white.withValues(alpha: 0.4),
       ),
