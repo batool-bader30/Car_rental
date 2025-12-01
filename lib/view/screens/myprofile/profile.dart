@@ -77,34 +77,40 @@ class _ProfilepageState extends State<Profilepage> {
                       SizedBox(height: 40.h),
 
                       // الصورة
-                  Container(
+                 Container(
   width: 110.sp,
   height: 110.sp,
-  padding: EdgeInsets.all(3.sp), // سمك الإطار
+  padding: EdgeInsets.all(4.sp), // سمك الإطار
   decoration: BoxDecoration(
     shape: BoxShape.circle,
     gradient: LinearGradient(
       colors: [
-        const Color.fromARGB(255, 94, 87, 64),
-        const Color.fromARGB(255, 0, 0, 0),
-        const Color.fromARGB(255, 239, 234, 185),
+        Color.fromARGB(255, 102, 95, 73),
+        Color.fromARGB(255, 63, 63, 19),
+        Color.fromARGB(255, 239, 234, 185),
       ],
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
     ),
   ),
-  child: ClipOval(
-    child: Container(
-      color: Colors.white, // هذا اللون يظهر بين التدرج والصورة
-      child: CircleAvatar(
-        radius: 45.sp,
-        backgroundImage: (myuser.image != null && myuser.image!.isNotEmpty)
-            ? FileImage(File(myuser.image!)) as ImageProvider
-            : const AssetImage("assets/images/profileimag.png"),
-      ),
-    ),
+  child: Container(
+  width: 100.sp,
+  height: 100.sp,
+  padding: EdgeInsets.all(3.sp), // سمك الإطار
+  decoration: BoxDecoration(
+    shape: BoxShape.circle,
+    color: Colors.white
+  ),
+  child: CircleAvatar(
+      radius: 40.sp,
+      backgroundImage: (myuser.image != null && myuser.image!.isNotEmpty)
+          ? FileImage(File(myuser.image!)) as ImageProvider
+          : AssetImage("assets/images/profileimag.png"),
+    
   ),
 ),
+),
+
 
                       SizedBox(height: 5.h),
 
