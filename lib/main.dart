@@ -1,9 +1,11 @@
 import 'package:carrental/controllers/patment_provider.dart';
 import 'package:carrental/controllers/booking_provider.dart';
+import 'package:carrental/controllers/favorite_provider.dart';
 import 'package:carrental/controllers/user_controller.dart';
 import 'package:carrental/firebase_options.dart';
+
 import 'package:carrental/utils/stripe_payment/stripe_keys.dart';
-import 'package:carrental/view/screens/myprofile/profile.dart';
+
 import 'package:carrental/view/screens/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +34,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+         ChangeNotifierProvider<FavoriteProvider>(create: (context) => FavoriteProvider()),
         ChangeNotifierProvider<BookingProvider>(create: (context) => BookingProvider()),
         ChangeNotifierProvider<CarProvider>(create: (context) => CarProvider()),
                 ChangeNotifierProvider<PaymentProvider>(create: (context) => PaymentProvider()),
@@ -50,6 +53,7 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
+            //home: FavoritesScreen(),
             home: child,
           );
         },

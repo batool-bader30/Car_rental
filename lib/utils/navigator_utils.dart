@@ -4,6 +4,7 @@ import 'package:carrental/view/screens/auth/reset_pass.dart';
 import 'package:carrental/view/screens/auth/signup_page.dart';
 import 'package:carrental/view/screens/auth/user_info.dart';
 import 'package:carrental/view/screens/date_time_screen.dart';
+import 'package:carrental/view/screens/favorites_screen.dart';
 import 'package:carrental/view/screens/home_screen.dart';
 import 'package:carrental/view/screens/splash_screen.dart';
 import 'package:carrental/view/screens/page.dart' as p;
@@ -62,6 +63,13 @@ class NavigatorUtils {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => DateTimeScreen(car:car)),
+    );
+  }
+  
+  static void navigateToFavoriteScreen(BuildContext context,CarModel car) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => FavoritesScreen()),
     );
   }
   
