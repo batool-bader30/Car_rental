@@ -37,7 +37,7 @@ class SettingsMenuItem extends StatelessWidget {
                   SizedBox(width: 16.w),
                   SmallText(
                     text: text,
-                    size: 20.sp,
+                    size: 18.sp,
                   ),
                   Spacer(),
                   Icon(

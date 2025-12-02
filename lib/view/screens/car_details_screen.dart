@@ -6,6 +6,7 @@ import 'package:carrental/view/widgets/icons_widget.dart';
 import 'package:carrental/view/widgets/overview_widget.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 class CarDetailsScreen extends StatelessWidget {
@@ -17,184 +18,159 @@ class CarDetailsScreen extends StatelessWidget {
     final fav = Provider.of<FavoriteProvider>(context);
 
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        bottom: false,
-        child: ListView(
-          //padding: EdgeInsets.all(16),
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(12),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+backgroundColor: Colors.white,
+body: SafeArea(
+bottom: false,
+child: ListView(
+children: [
+Padding(
+padding: EdgeInsets.all(12.h),
+child: Row(
+mainAxisAlignment: MainAxisAlignment.spaceBetween,
+children: [
+InkWell(
+onTap: () => Navigator.pop(context),
+child: IconWidget(icon: Icons.arrow_back),
+),
+Text(
+"Car Details",
+style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
+),
+InkWell(
+onTap: () {
+fav.toggleFavorites(car.id);
+},
+child: Icon(
+fav.isFavorite(car.id)
+? Icons.favorite
+: Icons.favorite_border,
+color: fav.isFavorite(car.id) ? Colors.red : Colors.black,
+size: 28.h,
+),
+),
+],
+),
+),
+SizedBox(height: 20.h),
+Padding(
+padding: EdgeInsets.all(12.h),
+child: Container(
+height: 230.h,
+width: double.infinity,
+decoration: BoxDecoration(
+color: Colors.white,
+borderRadius: BorderRadius.circular(20.r),
+image: DecorationImage(
+image: NetworkImage(car.imageUrl),
+fit: BoxFit.contain,
+),
+),
+),
+),
+Padding(
+padding: EdgeInsets.all(12.h),
+child: Text(
+car.name,
+style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
+),
+),
+SizedBox(height: 0.h),
+Padding(
+padding: EdgeInsets.all(10.h),
+child: Text(
+car.description,
+style: TextStyle(
+fontSize: 14.sp,
+color: Colors.black,
+height: 1.4.h,
+),
+),
+),
+SizedBox(height: 16.h),
+Container(
+width: MediaQuery.sizeOf(context).width,
+padding: EdgeInsets.all(10.h),
+decoration: BoxDecoration(
+color: Colors.black,
+borderRadius: BorderRadius.only(
+topLeft: Radius.circular(30.r),
+topRight: Radius.circular(30.r),
+),
+),
+child: Padding(
+padding: EdgeInsets.all(18.h),
+child: Column(
+crossAxisAlignment: CrossAxisAlignment.start,
+children: [
+Text(
+"Overview",
+style: TextStyle(
+color: Colors.white,
+fontSize: 20.sp,
+fontWeight: FontWeight.bold,
+),
+),
+SizedBox(height: 16.h),
+Row(
+mainAxisAlignment: MainAxisAlignment.spaceBetween,
+children: [
+OverviewWidget(icon: Icons.speed, text: "350 km"),
+OverviewWidget(icon: Icons.swap_vert, text: " Automatic"),
+],
+),
+SizedBox(height: 10.h),
+Row(
+mainAxisAlignment: MainAxisAlignment.spaceBetween,
+children: [
+OverviewWidget(icon: Icons.local_gas_station, text: "Diesel"),
+OverviewWidget(icon: Icons.event_seat, text: " 4 Seats"),
+],
+),
+SizedBox(height: 20.h),
+Row(
+mainAxisAlignment: MainAxisAlignment.spaceBetween,
+children: [
+Text(
+"${car.price}/Day",
+style: TextStyle(
+color: Colors.white,
+fontSize: 22.sp,
+fontWeight: FontWeight.bold,
+),
+),
+ElevatedButton(
+style: ElevatedButton.styleFrom(
+backgroundColor: Colors.amberAccent,
+foregroundColor: Colors.black,
+padding: EdgeInsets.symmetric(
+horizontal: 40.w,
+vertical: 15.h,
+),
+shape: RoundedRectangleBorder(
+borderRadius: BorderRadius.circular(14.r),
+),
+),
+onPressed: () {
+NavigatorUtils.navigateToDateTimeScreen(context, car);
+},
+child: Text(
+"Book Car",
+style: TextStyle(
+fontSize: 16.sp,
+fontWeight: FontWeight.bold,
+),
+),
+),
+],
+),
+],
+),
+),
+),
+],
+),
+),
+);
 
-                children: [
-                  InkWell(
-                    onTap: () => Navigator.pop(context),
-                    child: IconWidget(icon: Icons.arrow_back),
-                  ),
-                  Text(
-                    "Car Details",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      fav.toggleFavorites(car.id); // <<< مهم جداً
-                    },
-                    child: Icon(
-                      fav.isFavorite(car.id)
-                          ? Icons.favorite
-                          : Icons.favorite_border,
-                      color: fav.isFavorite(car.id) ? Colors.red : Colors.black,
-                      size: 28,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 20),
-            //image
-            Padding(
-              padding: const EdgeInsets.all(12),
-              child: Container(
-                height: 300,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  image: DecorationImage(
-                    image: NetworkImage(car.imageUrl),
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
-            ),
-            //name
-            Padding(
-              padding: const EdgeInsets.all(12),
-              child: Text(
-                car.name,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-            ),
-            SizedBox(height: 12),
-
-            //desecrption
-            Padding(
-              padding: const EdgeInsets.all(12),
-              child: Text(
-                car.description,
-                style: TextStyle(
-                  fontSize: 13,
-                  color: Colors.black,
-                  height: 1.4,
-                ),
-              ),
-            ),
-            SizedBox(height: 16),
-
-            Expanded(
-              child: Container(
-                width: MediaQuery.sizeOf(context).width,
-
-                padding: EdgeInsets.all(10),
-                //margin: EdgeInsets.only(bottom: 30),
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(18),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Overview",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-
-                      SizedBox(height: 16),
-
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          OverviewWidget(icon: Icons.speed, text: "350 km"),
-                          OverviewWidget(
-                            icon: Icons.swap_vert,
-                            text: " Automatic",
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          OverviewWidget(
-                            icon: Icons.local_gas_station,
-                            text: "Diesel",
-                          ),
-                          OverviewWidget(
-                            icon: Icons.event_seat,
-                            text: " 4 Seats",
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "\$${car.price}/Day",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.amberAccent,
-                              foregroundColor: Colors.black,
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 40,
-                                vertical: 15,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(14),
-                              ),
-                            ),
-                            onPressed: () {
-                              NavigatorUtils.navigateToDateTimeScreen(
-                                context,
-                                car,
-                              );
-                            },
-                            child: Text(
-                              "Book Car",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }

@@ -4,11 +4,13 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 
 abstract class PaymentManager{
 
-  static Future<void>makePayment(int amount,String currency)async{
+  static Future<void>makePayment(int amount,String currency,{required Function onSuccess})async{
     try {
       String clientSecret=await _getClientSecret((amount*100).toString(), currency);
       await _initializePaymentSheet(clientSecret);
       await Stripe.instance.presentPaymentSheet();
+      onSuccess();
+
     } catch (error) {
       throw Exception(error.toString());
     }

@@ -90,19 +90,9 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
         ),
+      
       ),
-      // bottomNavigationBar: CustomBottomNavBar(
-      //   selectedIndex: selectedin,
-      //   onTap: (index) {
-      //     setState(() => selectedIndex = index);
-      //     if (index == 1) {
-      //       Navigator.push(
-      //         context,
-      //         MaterialPageRoute(builder: (_) => FavoritesScreen()),
-      //       );
-      //     }
-      //   },
-      // ),
+     
     );
   }
 }

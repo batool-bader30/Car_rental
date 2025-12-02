@@ -109,7 +109,7 @@ class userinfo extends StatelessWidget {
                               alignment: Alignment.center,
                               child: InkWell(
                                 onTap: () {
-                                  NavigatorUtils.page(context);
+                                  NavigatorUtils.navigateToHomeScreen(context);
                                 },
                                 child: MediumText(
                                   text: "skip ",

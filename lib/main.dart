@@ -5,6 +5,7 @@ import 'package:carrental/controllers/user_controller.dart';
 import 'package:carrental/firebase_options.dart';
 
 import 'package:carrental/utils/stripe_payment/stripe_keys.dart';
+import 'package:carrental/view/screens/SuccessfulScreen.dart';
 
 import 'package:carrental/view/screens/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -48,7 +49,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: ScreenUtilInit(
-        designSize: const Size(375, 812),
+        designSize: const Size(400, 812),
         minTextAdapt: true,
         builder: (context, child) {
           return MaterialApp(

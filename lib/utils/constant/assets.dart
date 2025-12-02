@@ -11,6 +11,9 @@ class Assets {
       static const String edit = 'assets/images/Edit.png';
       static const String billing = 'assets/images/Billing.png';
       static const String information = 'assets/images/Information.png';
+            static const String successicon = 'assets/images/Success.png';
+            static const String successfulScreen = 'assets/images/SuccessfulScreen.png';
+
 
 
 }

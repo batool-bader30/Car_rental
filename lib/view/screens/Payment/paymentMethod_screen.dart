@@ -1,6 +1,8 @@
 import 'package:carrental/controllers/patment_provider.dart';
+import 'package:carrental/models/booking_model.dart';
 import 'package:carrental/utils/constant/app_color.dart';
 import 'package:carrental/utils/constant/assets.dart';
+import 'package:carrental/utils/navigator_utils.dart';
 import 'package:carrental/utils/stripe_payment/payment_manage.dart';
 import 'package:carrental/view/screens/Payment/widget.dart';
 import 'package:carrental/view/widgets/button.dart';
@@ -10,7 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PaymentmethodScreen extends StatefulWidget {
-  const PaymentmethodScreen({super.key});
+  final BookingModel bookingModel;
+  const PaymentmethodScreen({super.key,required this.bookingModel});
 
   @override
   State<PaymentmethodScreen> createState() => _PaymentmethodScreenState();
@@ -57,13 +60,21 @@ class _PaymentmethodScreenState extends State<PaymentmethodScreen> {
 
                 PaymentMethodsScreen(),
                 SizedBox(height: 50),
-                SmallText(text: "Amount to pay: 2100JD ", size: 20),
+                SmallText(text: "Amount to pay: ${widget.bookingModel.totalprice} \$ ", size: 20),
 
                 Spacer(),
                 Button(
                   title: "Proceed to Payment",
                   ontap: () {
-                    PaymentManager.makePayment(40, "usd");
+                    
+                     PaymentManager.makePayment(
+                      widget.bookingModel.totalprice,
+                                "USD",
+                                onSuccess: () {
+                                  NavigatorUtils.navigateTosuccesssfulScreen(context, widget.bookingModel);
+                                },
+                              );
+
                   },
                 ),
               ],

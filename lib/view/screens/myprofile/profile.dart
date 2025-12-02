@@ -6,6 +6,7 @@ import 'package:carrental/utils/navigator_utils.dart';
 import 'package:carrental/utils/validations/validations_metod%20(1).dart';
 import 'package:carrental/view/screens/myprofile/editprofile.dart';
 import 'package:carrental/view/screens/myprofile/profile_menu_item.dart';
+import 'package:carrental/view/widgets/bottom_nav.dart';
 import 'package:carrental/view/widgets/button.dart';
 import 'package:carrental/view/widgets/pass_field.dart';
 import 'package:carrental/view/widgets/text.dart';
@@ -41,6 +42,8 @@ class _ProfilepageState extends State<Profilepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+            bottomNavigationBar: CustomBottomNavBar(selectedIndex: 2),
+
       resizeToAvoidBottomInset: false,
       body: Consumer<UserController>(
         builder: (context, ctrl, child) {
@@ -52,14 +55,20 @@ class _ProfilepageState extends State<Profilepage> {
             }
           return Stack(
             children: [
-              Image.asset(Assets.backgroungimage, fit: BoxFit.fill),
+              Positioned.fill(
+      child: Image.asset(
+        Assets.backgroungimage,
+        fit: BoxFit.cover,
+        alignment: Alignment.topCenter,
+      ),
+    ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                 
                   Container(
-                    height: 630,
+                    height: 550.h,
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 255, 255, 255),
                       borderRadius: BorderRadius.only(
@@ -74,20 +83,20 @@ class _ProfilepageState extends State<Profilepage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                     
-                      SizedBox(height: 40.h),
+                      SizedBox(height: 30.h),
 
                       // الصورة
                  Container(
-  width: 110.sp,
-  height: 110.sp,
+  width: 100.sp,
+  height: 100.sp,
   padding: EdgeInsets.all(4.sp), // سمك الإطار
   decoration: BoxDecoration(
     shape: BoxShape.circle,
     gradient: LinearGradient(
       colors: [
-        Color.fromARGB(255, 102, 95, 73),
-        Color.fromARGB(255, 63, 63, 19),
-        Color.fromARGB(255, 239, 234, 185),
+        Color.fromARGB(255, 212, 165, 10),
+        Color.fromARGB(255, 245, 221, 2),
+        Color.fromARGB(255, 35, 35, 34),
       ],
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
@@ -181,7 +190,7 @@ class _ProfilepageState extends State<Profilepage> {
                                            children: [
                                              Image.asset(
                                                Assets.logout,
-                                               width: 30.w,
+                                               width: 35.w,
                                              ),
                                              SizedBox(width: 16.w),
                                              SmallText(

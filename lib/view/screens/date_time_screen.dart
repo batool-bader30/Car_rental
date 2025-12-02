@@ -2,6 +2,8 @@ import 'package:carrental/controllers/booking_provider.dart';
 import 'package:carrental/models/booking_model.dart';
 import 'package:carrental/models/car_model.dart';
 import 'package:carrental/utils/constant/app_color.dart';
+import 'package:carrental/utils/navigator_utils.dart';
+import 'package:carrental/utils/stripe_payment/payment_manage.dart';
 import 'package:carrental/utils/validations/exptions%20(1).dart';
 import 'package:carrental/view/widgets/button.dart';
 import 'package:carrental/view/widgets/icons_widget.dart';
@@ -9,7 +11,6 @@ import 'package:carrental/view/widgets/text_field.dart';
 import 'package:flutter/material.dart' hide TextField;
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
-
 
 class DateTimeScreen extends StatefulWidget {
   final CarModel car;
@@ -154,7 +155,7 @@ class _DateTimeScreenState extends State<DateTimeScreen> {
                             color: Colors.white,
                           ),
                         ),
-                        SizedBox(height: 20),
+                        SizedBox(height: 5),
                         GestureDetector(
                           onTap: _pickDate,
                           child: Container(
@@ -184,7 +185,7 @@ class _DateTimeScreenState extends State<DateTimeScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 20),
+                        SizedBox(height: 18),
                         Text(
                           "Time",
                           style: TextStyle(
@@ -193,7 +194,7 @@ class _DateTimeScreenState extends State<DateTimeScreen> {
                             color: Colors.white,
                           ),
                         ),
-                        SizedBox(height: 20),
+                        SizedBox(height: 5),
                         Row(
                           children: [
                             Expanded(
@@ -230,7 +231,7 @@ class _DateTimeScreenState extends State<DateTimeScreen> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 20),
+                        SizedBox(height: 15),
                         Text(
                           "Total Hours",
                           style: TextStyle(
@@ -239,9 +240,9 @@ class _DateTimeScreenState extends State<DateTimeScreen> {
                             color: Colors.white,
                           ),
                         ),
-                        SizedBox(height: 20),
+                        SizedBox(height: 5),
                         HourstTextField(hoursController: hoursController),
-                        SizedBox(height: 50),
+                        SizedBox(height: 20),
                         Button(
                           title: "Next",
                           ontap: () async {
@@ -251,21 +252,28 @@ class _DateTimeScreenState extends State<DateTimeScreen> {
                               final booking = BookingModel(
                                 carName: widget.car.name,
 
-                                date: DateFormat('yyyy-MM-dd').format(selectedDate!),
+                                date: DateFormat(
+                                  'yyyy-MM-dd',
+                                ).format(selectedDate!),
                                 time: selectedTime!.format(context),
                                 hours: int.parse(hoursController.text),
+                                totalprice: (double.parse(hoursController.text) *
+                                        widget.car.price)
+                                    .toInt(),
                               );
 
                               await Provider.of<BookingProvider>(
                                 context,
                                 listen: false,
                               ).addBooking(booking);
-
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text("Booking saved successfully!"),
-                                ),
+                              NavigatorUtils.navigateToPaymentmethodScreen(
+                                context,booking
                               );
+                              // ScaffoldMessenger.of(context).showSnackBar(
+                              //   SnackBar(
+                              //     content: Text("Booking saved successfully!"),
+                              //   ),
+                              // );
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(

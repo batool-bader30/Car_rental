@@ -4,11 +4,12 @@ class BookingModel {
   final String? id;
   //final String carId;
   final String carName;
-  final String date;       // 'yyyy-MM-dd'
-  final String time;       // 'hh:mm'
+  final String date; // 'yyyy-MM-dd'
+  final String time; // 'hh:mm'
   //final String amPm;       // 'AM' or 'PM'
   final int hours;
-  //final double pricePerDay;
+  final int totalprice;
+  final bool ispaid;
 
   BookingModel({
     this.id,
@@ -16,9 +17,9 @@ class BookingModel {
     required this.carName,
     required this.date,
     required this.time,
-    
+ this.ispaid=false,
     required this.hours,
-    //required this.pricePerDay,
+    required this.totalprice,
   });
 
   factory BookingModel.fromMap(Map<String, dynamic> data, String id) {
@@ -28,8 +29,12 @@ class BookingModel {
       carName: data['carName'] ?? '',
       date: data['date'] ?? '',
       time: data['time'] ?? '',
+            ispaid: data['ispaid'],
+totalprice: data['totalprice'],
       //amPm: data['amPm'] ?? '',
-      hours: (data['hours'] ?? 0) is int ? (data['hours'] ?? 0) : int.tryParse('${data['hours']}') ?? 0,
+      hours: (data['hours'] ?? 0) is int
+          ? (data['hours'] ?? 0)
+          : int.tryParse('${data['hours']}') ?? 0,
       //pricePerDay: (data['pricePerDay'] is num) ? (data['pricePerDay'] as num).toDouble() : 0.0,
     );
   }
@@ -42,8 +47,8 @@ class BookingModel {
       'time': time,
       //'amPm': amPm,
       'hours': hours,
-      
-      
+      'totalprice':totalprice,
+      'ispaid':ispaid,
     };
   }
 }

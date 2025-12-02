@@ -2,6 +2,7 @@ import 'package:carrental/controllers/car_provider.dart';
 import 'package:carrental/controllers/favorite_provider.dart';
 
 import 'package:carrental/view/screens/car_details_screen.dart';
+import 'package:carrental/view/widgets/bottom_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +17,8 @@ class FavoritesScreen extends StatelessWidget {
     final favList=fav.favorite;
 
     return Scaffold(
+            bottomNavigationBar: CustomBottomNavBar(selectedIndex: 1),
+
       appBar: AppBar(
         title: Text("Favorite Cars"),
         centerTitle: true,
