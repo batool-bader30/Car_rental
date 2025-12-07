@@ -43,8 +43,8 @@ class UserController extends ChangeNotifier {
             .doc(userCredential.user!.uid)
             .set({
               "email": email?.trim(),
-              "name": null,
-              "phoneNumber": null,
+              "name": "",
+              "phoneNumber": "",
               "lastdate": DateTime.now(),
             }, SetOptions(merge: true));
         getinfo();
@@ -52,9 +52,9 @@ class UserController extends ChangeNotifier {
         return "";
       }
     } on FirebaseAuthException catch (e) {
-      print("FirebaseAuthException: ${e.message}");
+      print("////////FirebaseAuthException: ${e.message}");
     } catch (e) {
-      print("Unexpected error: $e");
+      print("//////Unexpected error: $e");
     }
   }
 
@@ -109,6 +109,7 @@ class UserController extends ChangeNotifier {
       }, SetOptions(merge: true));
     }
     getinfo();
+    notifyListeners();
   }
 
   Future<void> getinfo() async {

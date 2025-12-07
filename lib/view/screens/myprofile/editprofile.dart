@@ -211,7 +211,7 @@ class _ProfilepageState extends State<Editprofile> {
                                   await ctrl.saveUserData(
                                     name: nameController.text.trim(),
                                     phoneNumber: phoneController.text.trim(),
-                                    image: imagecontroller.text.trim(),
+                                    image: myuser.image??"",
                                     gender: genderController.text.trim(),
                                   );
                                   Navigator.pop(context);
