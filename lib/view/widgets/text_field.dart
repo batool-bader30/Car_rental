@@ -1,6 +1,7 @@
 import 'package:carrental/utils/constant/app_color.dart';
 import 'package:carrental/utils/validations/exptions%20(1).dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyTextField extends StatelessWidget {
   final TextEditingController? controller;
@@ -10,7 +11,7 @@ class MyTextField extends StatelessWidget {
   final double? borderRadius;
   final String? Function(String?)? validator;
   final Function(String)? onchanged;
-final Widget? sufixicon;
+  final Widget? sufixicon;
 
   const MyTextField({
     super.key,
@@ -20,45 +21,42 @@ final Widget? sufixicon;
     this.prefixIcon,
     this.sufixicon,
     this.borderRadius = 10,
-    this.validator, this.onchanged,
+    this.validator,
+    this.onchanged,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: BoxConstraints(),
-      child: TextFormField(
-        onChanged: onchanged,
-        controller: controller,
-        keyboardType: keyboardType,
-        decoration: InputDecoration(
-          labelText: labelText,
-          labelStyle: TextStyle(color: Color.fromARGB(255, 112, 112, 112)),
-          prefixIcon: prefixIcon,
-          prefixIconColor:  Color.fromARGB(255, 112, 112, 112),
-          suffixIcon:sufixicon ,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(borderRadius!),
-            borderSide: const BorderSide(color: Color.fromARGB(106, 249, 249, 249),),
-          ),
-          filled: true,
-          fillColor: Color.fromARGB(106, 249, 249, 249),
-
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(borderRadius!),
-            borderSide: const BorderSide(color:Color.fromARGB(106, 249, 249, 249),),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(borderRadius!),
-            borderSide:  BorderSide(color:Color.fromARGB(106, 249, 249, 249),),
-          ),
+    return TextFormField(
+      onChanged: onchanged,
+      controller: controller,
+      keyboardType: keyboardType,
+      decoration: InputDecoration(
+        labelText: labelText,
+        labelStyle: TextStyle(color: Color.fromARGB(255, 112, 112, 112), fontSize: 14.sp),
+        prefixIcon: prefixIcon,
+        prefixIconColor: Color.fromARGB(255, 112, 112, 112),
+        suffixIcon: sufixicon,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius!.r),
+          borderSide: const BorderSide(color: Color.fromARGB(106, 249, 249, 249)),
         ),
-        validator: validator,
+        filled: true,
+        fillColor: Color.fromARGB(106, 249, 249, 249),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius!.r),
+          borderSide: const BorderSide(color: Color.fromARGB(106, 249, 249, 249)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius!.r),
+          borderSide: const BorderSide(color: Color.fromARGB(106, 249, 249, 249)),
+        ),
+        contentPadding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 12.w),
       ),
+      validator: validator,
     );
   }
 }
-
 
 class TextField2 extends StatelessWidget {
   final TextEditingController? controller;
@@ -68,7 +66,7 @@ class TextField2 extends StatelessWidget {
   final double? borderRadius;
   final String? Function(String?)? validator;
   final Function(String)? onchanged;
-final Widget? sufixicon;
+  final Widget? sufixicon;
 
   const TextField2({
     super.key,
@@ -78,62 +76,60 @@ final Widget? sufixicon;
     this.prefixIcon,
     this.sufixicon,
     this.borderRadius = 10,
-    this.validator, this.onchanged,
+    this.validator,
+    this.onchanged,
   });
-
-  @override
-  Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: BoxConstraints(),
-      child: TextFormField(
-        onChanged: onchanged,
-        controller: controller,
-        keyboardType: keyboardType,
-        decoration: InputDecoration(
-          labelText: labelText,
-          labelStyle: TextStyle(color:Colors.grey,),
-          prefixIcon: prefixIcon,
-          prefixIconColor:  Colors.grey,
-          suffixIcon:sufixicon ,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(borderRadius!),
-            borderSide: const BorderSide(color: Color.fromARGB(255, 236, 234, 234),),
-          ),
-          filled: true,
-          fillColor: Color.fromARGB(106, 242, 241, 241),
-
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(borderRadius!),
-            borderSide: const BorderSide(color:Color.fromARGB(255, 236, 234, 234),),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(borderRadius!),
-            borderSide:  BorderSide(color:Color.fromARGB(255, 236, 234, 234),),
-          ),
-        ),
-        validator: validator,
-      ),
-    );
-  }
-}
-
-class HourstTextField extends StatelessWidget {
-  const HourstTextField({
-    super.key,
-    required this.hoursController,
-  });
-
-  final TextEditingController hoursController;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: hoursController,
+      onChanged: onchanged,
+      controller: controller,
+      keyboardType: keyboardType,
+      decoration: InputDecoration(
+        labelText: labelText,
+        labelStyle: TextStyle(color: Colors.grey, fontSize: 14.sp),
+        prefixIcon: prefixIcon,
+        prefixIconColor: Colors.grey,
+        suffixIcon: sufixicon,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius!.r),
+          borderSide: const BorderSide(color: Color.fromARGB(255, 236, 234, 234)),
+        ),
+        filled: true,
+        fillColor: Color.fromARGB(106, 242, 241, 241),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius!.r),
+          borderSide: const BorderSide(color: Color.fromARGB(255, 236, 234, 234)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius!.r),
+          borderSide: const BorderSide(color: Color.fromARGB(255, 236, 234, 234)),
+        ),
+        contentPadding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 12.w),
+      ),
+      validator: validator,
+    );
+  }
+}
+
+class DaystTextField extends StatelessWidget {
+  const DaystTextField({
+    super.key,
+    required this.DaysController,
+  });
+
+  final TextEditingController DaysController;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: DaysController,
       keyboardType: TextInputType.number,
-      style: TextStyle(color: AppColor.primary),
+      style: TextStyle(color: AppColor.primary, fontSize: 14.sp),
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return "Please enter number of hours";
+          return "Please enter number of Days";
         } else if (!RegExp(
           RegExption.onlyNumber,
         ).hasMatch(value)) {
@@ -145,21 +141,22 @@ class HourstTextField extends StatelessWidget {
         prefixIcon: Icon(
           Icons.hourglass_empty,
           color: AppColor.primary,
+          size: 24.sp,
         ),
-        hintStyle: TextStyle(color: AppColor.primary),
-        hintText: "Enter Hours",
+        hintStyle: TextStyle(color: AppColor.primary, fontSize: 14.sp),
+        hintText: "Enter Days",
         filled: true,
         fillColor: Colors.grey[900],
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(10.r),
           borderSide: BorderSide(color: Colors.grey),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(10.r),
           borderSide: BorderSide(color: Colors.amberAccent),
         ),
+        contentPadding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 12.w),
       ),
     );
   }
 }
-

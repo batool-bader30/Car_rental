@@ -11,8 +11,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 class SignupPage extends StatelessWidget {
-  TextEditingController passwordcontroller = TextEditingController();
-  TextEditingController emailcontroller = TextEditingController();
+  SignupPage({super.key});
+
+  final TextEditingController passwordcontroller = TextEditingController();
+  final TextEditingController emailcontroller = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -29,72 +31,72 @@ class SignupPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: EdgeInsets.all(20.w),
                     child: BoldText(
                       text: "Sign Up",
-                      size: 30,
+                      size: 30.sp,
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(height: 10),
-
+                  SizedBox(height: 10.h),
                   Container(
-                    height: 530,
+                    height: 530.h,
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(201, 105, 104, 104),
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
+                        topLeft: Radius.circular(30.r),
+                        topRight: Radius.circular(30.r),
                       ),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(25.0),
+                      padding: EdgeInsets.all(25.w),
                       child: Form(
                         key: _formKey,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            SizedBox(height: 20),
-
-                            Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Align(
-                                alignment: Alignment.topLeft,
+                            SizedBox(height: 20.h),
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: Padding(
+                                padding: EdgeInsets.all(5.w),
                                 child: SmallText(
                                   text: "E-mail",
                                   color: Colors.white,
-                                  size: 18,
+                                  size: 18.sp,
                                 ),
                               ),
                             ),
-
                             MyTextField(
                               controller: emailcontroller,
                               validator: ValidationsMetod.validateEmail,
                               labelText: "Enter Your Email",
-                              prefixIcon: Icon(Icons.email_outlined),
+                              prefixIcon: Icon(Icons.email_outlined, size: 24.sp),
                             ),
-                            SizedBox(height: 10),
-                            Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Align(
-                                alignment: Alignment.topLeft,
+                            SizedBox(height: 10.h),
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: Padding(
+                                padding: EdgeInsets.all(5.w),
                                 child: SmallText(
-                                  text: "password",
+                                  text: "Password",
                                   color: Colors.white,
-                                  size: 18,
+                                  size: 18.sp,
                                 ),
                               ),
                             ),
                             MyPasswordField(
-                              prefixIcon: Icon(Icons.lock_outline),
+                              prefixIcon: Icon(Icons.lock_outline, size: 24.sp),
                               controller: passwordcontroller,
                               validator: ValidationsMetod.validatePassword,
                               labelText: "Enter Your Password",
+                              borderRadius: 12.r,
                             ),
-                            SizedBox(height: 30.sp),
+                            SizedBox(height: 30.h),
                             Button(
                               title: "Continue",
+                              height: 50.h,
+                              width: 330.w,
                               ontap: () async {
                                 if (_formKey.currentState!.validate()) {
                                   final result = await ctrl.createUser(
@@ -102,15 +104,11 @@ class SignupPage extends StatelessWidget {
                                     passwordcontroller.text,
                                   );
                                   if (result == "") {
-                                    NavigatorUtils.navigateToUserInfoScreen(
-                                      context,
-                                    );
+                                    NavigatorUtils.navigateToUserInfoScreen(context);
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
-                                        content: Text(
-                                          "Username already exists",
-                                        ),
+                                        content: Text("Username already exists"),
                                         backgroundColor: Colors.red,
                                         duration: Duration(seconds: 5),
                                       ),
@@ -119,20 +117,18 @@ class SignupPage extends StatelessWidget {
                                 }
                               },
                             ),
-                            
                             Spacer(),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 SmallText(
-                                  text: "Do you have an account ? ",
+                                  text: "Do you have an account? ",
                                   color: Colors.white,
+                                  size: 16.sp,
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    NavigatorUtils.navigateToLoginScreen(
-                                      context,
-                                    );
+                                    NavigatorUtils.navigateToLoginScreen(context);
                                   },
                                   child: MediumText(
                                     text: "Sign In",
@@ -142,7 +138,7 @@ class SignupPage extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 30),
+                            SizedBox(height: 30.h),
                           ],
                         ),
                       ),

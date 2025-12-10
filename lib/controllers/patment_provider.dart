@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 
 class PaymentProvider with ChangeNotifier {
-  int _selectedIndex = 0; // افتراضيًا أول وحدة مختارة
+  int _selectedIndex = 0;
 
   int get selectedIndex => _selectedIndex;
 
   void selectPaymentMethod(int index) {
     _selectedIndex = index;
-    notifyListeners(); // لتحديث الواجهة عند تغيير القيمة
+    notifyListeners();
   }
 
   final List<String> paymentMethods = [
-    "Credit / Debit Card",
-    "Cash Payment",
+    "Pay Now",
+    "Pay Later",
   ];
+  
 }

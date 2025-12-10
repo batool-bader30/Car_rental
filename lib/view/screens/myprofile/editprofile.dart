@@ -53,7 +53,6 @@ class _ProfilepageState extends State<Editprofile> {
         builder: (context, ctrl, child) {
           final myuser = ctrl.userModel;
 
-          // إذا البيانات لم تصل بعد
           if (myuser == null) {
             return const Center(child: CircularProgressIndicator());
           }
@@ -61,38 +60,37 @@ class _ProfilepageState extends State<Editprofile> {
             children: [
               Image.asset(Assets.backgroungimage, fit: BoxFit.fill),
               Positioned(
-                left: 10,
-                top: 30,
+                left: 10.w,
+                top: 30.h,
                 child: InkWell(
                   onTap: () => Navigator.pop(context),
                   child: IconWidget(icon: Icons.arrow_back),
                 ),
               ),
-
               Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    height: 630,
+                    height: 630.h,
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 255, 255, 255),
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
+                        topLeft: Radius.circular(30.r),
+                        topRight: Radius.circular(30.r),
                       ),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(20.0),
+                      padding: EdgeInsets.all(20.w),
                       child: Form(
                         key: _formKey,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            SizedBox(height: 20),
+                            SizedBox(height: 20.h),
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(8.w),
                               child: SmallText(
                                 text: 'Edit Profile',
                                 size: 24.sp,
@@ -103,45 +101,45 @@ class _ProfilepageState extends State<Editprofile> {
                             Stack(
                               children: [
                                 Container(
-                                  width: 100.sp,
-                                  height: 100.sp,
-                                  padding: EdgeInsets.all(4.sp), // سمك الإطار
+                                  width: 100.w,
+                                  height: 100.h,
+                                  padding: EdgeInsets.all(4.w),
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     gradient: LinearGradient(
                                       colors: [
-        Color.fromARGB(255, 212, 165, 10),
-        Color.fromARGB(255, 245, 221, 2),
-        Color.fromARGB(255, 35, 35, 34),
-      ],
+                                        Color.fromARGB(255, 212, 165, 10),
+                                        Color.fromARGB(255, 245, 221, 2),
+                                        Color.fromARGB(255, 35, 35, 34),
+                                      ],
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
                                     ),
                                   ),
                                   child: Container(
-                                    width: 100.sp,
-                                    height: 100.sp,
-                                    padding: EdgeInsets.all(3.sp), // سمك الإطار
+                                    width: 100.w,
+                                    height: 100.h,
+                                    padding: EdgeInsets.all(3.w),
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       color: Colors.white,
                                     ),
                                     child: CircleAvatar(
-                                      radius: 40.sp,
+                                      radius: 40.r,
                                       backgroundImage:
                                           (myuser.image != null &&
-                                              myuser.image!.isNotEmpty)
-                                          ? FileImage(File(myuser.image!))
-                                                as ImageProvider
-                                          : AssetImage(
-                                              "assets/images/profileimag.png",
-                                            ),
+                                                  myuser.image!.isNotEmpty)
+                                              ? FileImage(File(myuser.image!))
+                                                  as ImageProvider
+                                              : AssetImage(
+                                                  "assets/images/profileimag.png",
+                                                ),
                                     ),
                                   ),
                                 ),
                                 Positioned(
-                                  bottom: 7.sp,
-                                  right: 5.sp,
+                                  bottom: 7.h,
+                                  right: 5.w,
                                   child: GestureDetector(
                                     onTap: () async {
                                       await ctrl.pickImageAndSave();
@@ -162,48 +160,39 @@ class _ProfilepageState extends State<Editprofile> {
                                 ),
                               ],
                             ),
-
                             SizedBox(height: 5.h),
-
-                            // الاسم
                             SmallText(
                               text: myuser.name!,
                               size: 24.sp,
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
                             ),
-
-                            // رقم الهاتف
                             SmallText(
                               text: myuser.email!,
                               size: 14.sp,
                               color: Colors.black,
                             ),
-
-                            SizedBox(height: 40.sp),
-
+                            SizedBox(height: 40.h),
                             TextField2(
                               labelText: "Name",
                               controller: nameController,
                               validator: ValidationsMetod.validateName,
                             ),
                             SizedBox(height: 18.h),
-
                             TextField2(
                               labelText: "Phone Number",
                               controller: phoneController,
-                              validator: ValidationsMetod.validatePhoneNumber,
+                              validator:
+                                  ValidationsMetod.validatePhoneNumber,
                               keyboardType: TextInputType.number,
                             ),
                             SizedBox(height: 18.h),
-
                             Dropdown_Field(
                               labelText: "Gender",
                               items: ['Male', 'Female'],
                               controller: genderController,
                             ),
-                            SizedBox(height: 20.sp),
-
+                            SizedBox(height: 20.h),
                             Button(
                               title: "save",
                               ontap: () async {
@@ -211,7 +200,7 @@ class _ProfilepageState extends State<Editprofile> {
                                   await ctrl.saveUserData(
                                     name: nameController.text.trim(),
                                     phoneNumber: phoneController.text.trim(),
-                                    image: myuser.image??"",
+                                    image: myuser.image ?? "",
                                     gender: genderController.text.trim(),
                                   );
                                   Navigator.pop(context);

@@ -34,7 +34,6 @@ class _ProfilepageState extends State<Profilepage> {
     });
   }
 
-  // دالة لمراجعة النصوص لتجنب Null
   String safeText(String? text, [String defaultText = ""]) {
     return (text != null && text.isNotEmpty) ? text : defaultText;
   }
@@ -42,171 +41,143 @@ class _ProfilepageState extends State<Profilepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            bottomNavigationBar: CustomBottomNavBar(selectedIndex: 2),
-
+      bottomNavigationBar: CustomBottomNavBar(selectedIndex: 2),
       resizeToAvoidBottomInset: false,
       body: Consumer<UserController>(
         builder: (context, ctrl, child) {
           final myuser = ctrl.userModel;
 
-            // إذا البيانات لم تصل بعد
-            if (myuser == null) {
-              return const Center(child: CircularProgressIndicator());
-            }
+          if (myuser == null) {
+            return const Center(child: CircularProgressIndicator());
+          }
           return Stack(
             children: [
               Positioned.fill(
-      child: Image.asset(
-        Assets.backgroungimage,
-        fit: BoxFit.cover,
-        alignment: Alignment.topCenter,
-      ),
-    ),
+                child: Image.asset(
+                  Assets.backgroungimage,
+                  fit: BoxFit.cover,
+                  alignment: Alignment.topCenter,
+                ),
+              ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                
                   Container(
                     height: 550.h,
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 255, 255, 255),
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
+                        topLeft:Radius.circular( 30.r),
+                        topRight: Radius.circular( 30.r),
                       ),
                     ),
                     child: Padding(
-                padding: EdgeInsets.all(8.w),
-                child: Center(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                    
-                      SizedBox(height: 30.h),
-
-                      // الصورة
-                 Container(
-  width: 100.sp,
-  height: 100.sp,
-  padding: EdgeInsets.all(4.sp), // سمك الإطار
-  decoration: BoxDecoration(
-    shape: BoxShape.circle,
-    gradient: LinearGradient(
-      colors: [
-        Color.fromARGB(255, 212, 165, 10),
-        Color.fromARGB(255, 245, 221, 2),
-        Color.fromARGB(255, 35, 35, 34),
-      ],
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-    ),
-  ),
-  child: Container(
-  width: 100.sp,
-  height: 100.sp,
-  padding: EdgeInsets.all(3.sp), // سمك الإطار
-  decoration: BoxDecoration(
-    shape: BoxShape.circle,
-    color: Colors.white
-  ),
-  child: CircleAvatar(
-      radius: 40.sp,
-      backgroundImage: (myuser.image != null && myuser.image!.isNotEmpty)
-          ? FileImage(File(myuser.image!)) as ImageProvider
-          : AssetImage("assets/images/profileimag.png"),
-    
-  ),
-),
-),
-
-
-                      SizedBox(height: 5.h),
-
-                      // الاسم
-                      SmallText(
-                        text: safeText(myuser.name),
-                        size: 24.sp,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
-
-                      // رقم الهاتف
-                      SmallText(
-                        text: safeText(myuser.email, ""),
-                        size: 14.sp,
-                        color: Colors.black,
-                      ),
-
-                      SizedBox(height: 25.h),
-
-                      // قائمة الخيارات
-                      SettingsMenuItem(
-                        text: "Settings",
-                        image: Assets.Setting,
-                        onTap: () {
-                          // مثال لو تحبين تفعلي الانتقال للصفحة
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => Profileinfopage(inprofile: true),
-                          //   ),
-                          // );
-                        },
-                      ),
-                      SettingsMenuItem(
-                        text: "Billing Details",
-                        image: Assets.billing,
-                        onTap: () {
-                          // NavigatorUtils.navigateTosFavoriteScreen(context);
-                        },
-                      ),
-                      SettingsMenuItem(
-                        text: "Edit Profile",
-                        image: Assets.edit,
-                        onTap: () {
-                           Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Editprofile(),
+                      padding: EdgeInsets.all(8.w),
+                      child: Center(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(height: 30.h),
+                            Container(
+                              width: 100.sp,
+                              height: 100.sp,
+                              padding: EdgeInsets.all(4.sp),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color.fromARGB(255, 212, 165, 10),
+                                    Color.fromARGB(255, 245, 221, 2),
+                                    Color.fromARGB(255, 35, 35, 34),
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                              ),
+                              child: Container(
+                                width: 100.sp,
+                                height: 100.sp,
+                                padding: EdgeInsets.all(3.sp),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.white,
+                                ),
+                                child: CircleAvatar(
+                                  radius: 40.sp,
+                                  backgroundImage: (myuser.image != null && myuser.image!.isNotEmpty)
+                                      ? FileImage(File(myuser.image!)) as ImageProvider
+                                      : AssetImage("assets/images/profileimag.png"),
+                                ),
+                              ),
                             ),
-                          );
-                        },
+                            SizedBox(height: 5.h),
+                            SmallText(
+                              text: safeText(myuser.name),
+                              size: 24.sp,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            SmallText(
+                              text: safeText(myuser.email, ""),
+                              size: 14.sp,
+                              color: Colors.black,
+                            ),
+                            SizedBox(height: 25.h),
+                            SettingsMenuItem(
+                              text: "Settings",
+                              image: Assets.Setting,
+                              onTap: () {},
+                            ),
+                            SettingsMenuItem(
+                              text: "Billing Details",
+                              image: Assets.billing,
+                              onTap: () {},
+                            ),
+                            SettingsMenuItem(
+                              text: "Edit Profile",
+                              image: Assets.edit,
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Editprofile(),
+                                  ),
+                                );
+                              },
+                            ),
+                            SettingsMenuItem(
+                              text: "Informations",
+                              image: Assets.information,
+                              onTap: () {},
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(20.w),
+                              child: InkWell(
+                                onTap: () {
+                                  ctrl.logout();
+                                  NavigatorUtils.navigateTosplashScreen(context);
+                                },
+                                child: Row(
+                                  children: [
+                                    Image.asset(
+                                      Assets.logout,
+                                      width: 37.w,
+                                    ),
+                                    SizedBox(width: 16.w),
+                                    SmallText(
+                                      text: "LogOut",
+                                      size: 18.sp,
+                                    ),
+                                    Spacer(),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      SettingsMenuItem(
-                        text: "Informations",
-                        image: Assets.information,
-                        onTap: () {},
-                      ),
-                     
-                       Padding(
-                         padding: const EdgeInsets.all(20.0),
-                         child: InkWell(
-                           onTap: () {
-                            ctrl.logout();
-                            NavigatorUtils.navigateTosplashScreen(context);
-                          },
-                           child: Row(
-                                           children: [
-                                             Image.asset(
-                                               Assets.logout,
-                                               width: 35.w,
-                                             ),
-                                             SizedBox(width: 16.w),
-                                             SmallText(
-                                               text: "LogOut",
-                                               size: 20.sp,
-                                             ),
-                                             Spacer(),
-                                            
-                                           ],
-                                         ),
-                         ),
-                       ),
-                    ],
-                  ),
-                ),
-              ),
+                    ),
                   ),
                 ],
               ),

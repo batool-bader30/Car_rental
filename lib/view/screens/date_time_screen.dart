@@ -8,9 +8,11 @@ import 'package:carrental/utils/validations/exptions%20(1).dart';
 import 'package:carrental/view/widgets/button.dart';
 import 'package:carrental/view/widgets/icons_widget.dart';
 import 'package:carrental/view/widgets/text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart' hide TextField;
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DateTimeScreen extends StatefulWidget {
   final CarModel car;
@@ -21,12 +23,10 @@ class DateTimeScreen extends StatefulWidget {
 }
 
 class _DateTimeScreenState extends State<DateTimeScreen> {
-  final TextEditingController hoursController = TextEditingController();
-
+  final TextEditingController DaysController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
-  String selectedPeriod = "AM";
 
   Future<void> _pickDate() async {
     DateTime? date = await showDatePicker(
@@ -35,7 +35,6 @@ class _DateTimeScreenState extends State<DateTimeScreen> {
       firstDate: DateTime.now(),
       lastDate: DateTime(2100),
     );
-
     if (date != null) setState(() => selectedDate = date);
   }
 
@@ -44,31 +43,11 @@ class _DateTimeScreenState extends State<DateTimeScreen> {
       context: context,
       initialTime: TimeOfDay.now(),
     );
-
     if (time != null) setState(() => selectedTime = time);
-  }
-
-  void _validateAndSubmit() {
-    if (_formKey.currentState!.validate()) {
-      if (selectedDate == null || selectedTime == null) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text("Please select date and time")));
-        return;
-      }
-      print("Date:$selectedDate");
-      print("Date:$selectedTime $selectedPeriod");
-      print("Hours:${hoursController.text}");
-
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text("Data validated successfully")));
-    }
   }
 
   @override
   Widget build(BuildContext context) {
-    //final BookingProvider= Provider.of<BookingProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -76,7 +55,7 @@ class _DateTimeScreenState extends State<DateTimeScreen> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(10),
+              padding: EdgeInsets.all(10.w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -86,115 +65,107 @@ class _DateTimeScreenState extends State<DateTimeScreen> {
                   ),
                   Text(
                     "Date & Time",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
                   ),
                   IconWidget(icon: Icons.favorite_border),
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 20.h),
             Container(
-              height: 190,
+              height: 190.h,
               width: double.infinity,
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(20.r),
                 image: DecorationImage(
                   image: NetworkImage(widget.car.imageUrl),
                   fit: BoxFit.contain,
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 10.h),
             Padding(
-              padding: const EdgeInsets.all(10),
+              padding: EdgeInsets.symmetric(horizontal: 10.w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     widget.car.name,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
                   ),
-
                   Text(
                     "\$${widget.car.price}/Day",
                     style: TextStyle(
                       color: Colors.black,
-                      fontSize: 22,
+                      fontSize: 22.sp,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 20),
-            //black box
+            SizedBox(height: 20.h),
             Expanded(
               child: Container(
                 width: MediaQuery.sizeOf(context).width,
-                //padding: EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: Colors.black,
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
+                    topLeft: Radius.circular(30.r),
+                    topRight: Radius.circular(30.r),
                   ),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(18),
+                  padding: EdgeInsets.all(18.w),
                   child: Form(
                     key: _formKey,
                     child: ListView(
                       children: [
-                        SizedBox(height: 10),
+                        SizedBox(height: 10.h),
                         Text(
                           "Date ",
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 18.sp,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
                         ),
-                        SizedBox(height: 5),
+                        SizedBox(height: 5.h),
                         GestureDetector(
                           onTap: _pickDate,
                           child: Container(
-                            height: 55,
+                            height: 55.h,
                             decoration: BoxDecoration(
                               color: Colors.grey[900],
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(10.r),
                               border: Border.all(color: Colors.grey),
                             ),
                             child: Row(
                               children: [
-                                SizedBox(width: 16),
-                                Icon(
-                                  Icons.calendar_month_outlined,
-                                  color: AppColor.primary,
-                                ),
-                                SizedBox(width: 12),
+                                SizedBox(width: 16.w),
+                                Icon(Icons.calendar_month_outlined, color: AppColor.primary),
+                                SizedBox(width: 12.w),
                                 Text(
                                   selectedDate == null
                                       ? "Enter Date"
-                                      : DateFormat(
-                                          'yyyy-MM-dd',
-                                        ).format(selectedDate!),
-                                  style: TextStyle(color: AppColor.primary),
+                                      : DateFormat('yyyy-MM-dd').format(selectedDate!),
+                                  style: TextStyle(color: AppColor.primary, fontSize: 16.sp),
                                 ),
                               ],
                             ),
                           ),
                         ),
-                        SizedBox(height: 18),
+                        SizedBox(height: 18.h),
                         Text(
                           "Time",
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 18.sp,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
                         ),
-                        SizedBox(height: 5),
+                        SizedBox(height: 5.h),
                         Row(
                           children: [
                             Expanded(
@@ -202,27 +173,22 @@ class _DateTimeScreenState extends State<DateTimeScreen> {
                               child: GestureDetector(
                                 onTap: _pickTime,
                                 child: Container(
-                                  height: 55,
+                                  height: 55.h,
                                   decoration: BoxDecoration(
                                     color: Colors.grey[900],
-                                    borderRadius: BorderRadius.circular(10),
+                                    borderRadius: BorderRadius.circular(10.r),
                                     border: Border.all(color: Colors.grey),
                                   ),
                                   child: Row(
                                     children: [
-                                      SizedBox(width: 16),
-                                      Icon(
-                                        Icons.access_time,
-                                        color: AppColor.primary,
-                                      ),
-                                      SizedBox(width: 12),
+                                      SizedBox(width: 16.w),
+                                      Icon(Icons.access_time, color: AppColor.primary),
+                                      SizedBox(width: 12.w),
                                       Text(
                                         selectedTime == null
                                             ? "Enter Time"
                                             : selectedTime!.format(context),
-                                        style: TextStyle(
-                                          color: AppColor.primary,
-                                        ),
+                                        style: TextStyle(color: AppColor.primary, fontSize: 16.sp),
                                       ),
                                     ],
                                   ),
@@ -231,18 +197,18 @@ class _DateTimeScreenState extends State<DateTimeScreen> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 15),
+                        SizedBox(height: 15.h),
                         Text(
-                          "Total Hours",
+                          "Total Days",
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 18.sp,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
                         ),
-                        SizedBox(height: 5),
-                        HourstTextField(hoursController: hoursController),
-                        SizedBox(height: 20),
+                        SizedBox(height: 5.h),
+                        DaystTextField(DaysController: DaysController),
+                        SizedBox(height: 30.h),
                         Button(
                           title: "Next",
                           ontap: () async {
@@ -250,35 +216,22 @@ class _DateTimeScreenState extends State<DateTimeScreen> {
                                 selectedDate != null &&
                                 selectedTime != null) {
                               final booking = BookingModel(
+                                ispaid: false,
+                                carId: widget.car.id,
                                 carName: widget.car.name,
-
-                                date: DateFormat(
-                                  'yyyy-MM-dd',
-                                ).format(selectedDate!),
+                                userId: FirebaseAuth.instance.currentUser!.uid,
+                                date: DateFormat('yyyy-MM-dd').format(selectedDate!),
                                 time: selectedTime!.format(context),
-                                hours: int.parse(hoursController.text),
-                                totalprice: (double.parse(hoursController.text) *
-                                        widget.car.price)
-                                    .toInt(),
+                                Days: int.parse(DaysController.text),
+                                totalprice: (double.parse(DaysController.text) * widget.car.price).toInt(),
                               );
 
-                              await Provider.of<BookingProvider>(
-                                context,
-                                listen: false,
-                              ).addBooking(booking);
-                              NavigatorUtils.navigateToPaymentmethodScreen(
-                                context,booking
-                              );
-                              // ScaffoldMessenger.of(context).showSnackBar(
-                              //   SnackBar(
-                              //     content: Text("Booking saved successfully!"),
-                              //   ),
-                              // );
+                              await Provider.of<BookingProvider>(context, listen: false)
+                                  .addBooking(booking);
+                              NavigatorUtils.navigateToPaymentmethodScreen(context, booking);
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text("Please fill all fields"),
-                                ),
+                                SnackBar(content: Text("Please fill all fields")),
                               );
                             }
                           },

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyPasswordField extends StatefulWidget {
   final TextEditingController? controller;
@@ -6,7 +7,7 @@ class MyPasswordField extends StatefulWidget {
   final double? borderRadius;
   final String? Function(String?)? validator;
   final Function(String)? onChanged;
-   final Widget? prefixIcon;
+  final Widget? prefixIcon;
 
   const MyPasswordField({
     super.key,
@@ -14,7 +15,8 @@ class MyPasswordField extends StatefulWidget {
     required this.labelText,
     this.borderRadius = 10,
     this.validator,
-    this.onChanged, this.prefixIcon,
+    this.onChanged,
+    this.prefixIcon,
   });
 
   @override
@@ -32,19 +34,22 @@ class _MyPasswordFieldState extends State<MyPasswordField> {
       obscureText: _obscureText,
       decoration: InputDecoration(
         labelText: widget.labelText,
-        labelStyle: const TextStyle(color: Color.fromARGB(255, 112, 112, 112)),
+        labelStyle: TextStyle(
+          color: const Color.fromARGB(255, 112, 112, 112),
+          fontSize: 14.sp,
+        ),
         prefixIcon: widget.prefixIcon,
-          prefixIconColor:  Color.fromARGB(255, 112, 112, 112),
+        prefixIconColor: const Color.fromARGB(255, 112, 112, 112),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(widget.borderRadius!),
+          borderRadius: BorderRadius.circular(widget.borderRadius!.r),
           borderSide: const BorderSide(color: Color.fromARGB(106, 249, 249, 249)),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(widget.borderRadius!),
+          borderRadius: BorderRadius.circular(widget.borderRadius!.r),
           borderSide: const BorderSide(color: Color.fromARGB(106, 249, 249, 249)),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(widget.borderRadius!),
+          borderRadius: BorderRadius.circular(widget.borderRadius!.r),
           borderSide: const BorderSide(color: Color.fromARGB(106, 249, 249, 249)),
         ),
         filled: true,
@@ -53,6 +58,7 @@ class _MyPasswordFieldState extends State<MyPasswordField> {
           icon: Icon(
             _obscureText ? Icons.visibility_off : Icons.visibility,
             color: const Color.fromARGB(255, 112, 112, 112),
+            size: 24.sp,
           ),
           onPressed: () {
             setState(() {
@@ -60,6 +66,7 @@ class _MyPasswordFieldState extends State<MyPasswordField> {
             });
           },
         ),
+        contentPadding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 12.w),
       ),
       validator: widget.validator,
     );

@@ -8,9 +8,10 @@ class FavoriteProvider with ChangeNotifier {
   List<FavoriteModel> get favorite => _favorite;
 
   /// تحميل المفضلة
-  Future<void> loadFavorites() async {
+  Future<void> loadFavorites(String userId) async {
     final snapshot = await FirebaseFirestore.instance
         .collection("favorite")
+        .where("userId",isEqualTo: userId)
         .get();
 
     _favorite = snapshot.docs
@@ -21,31 +22,31 @@ class FavoriteProvider with ChangeNotifier {
   }
 
   /// إضافة أو إزالة من المفضلة
-  Future<void> toggleFavorites(String carId) async {
+  Future<void> toggleFavorites(String carId,String userId) async {
     final existing =
-        _favorite.where((f) => f.carId == carId).toList();
+        _favorite.where((f) => f.carId == carId && f.userId==userId).toList();
 
     if (existing.isNotEmpty) {
       // احذف الموجود
       await FirebaseFirestore.instance
           .collection("favorite")
           .doc(existing.first.id)
-          .delete();
+          .delete(); 
 
       _favorite.remove(existing.first);
     } else {
       // أضف جديد
       final doc = await FirebaseFirestore.instance
           .collection("favorite")
-          .add({"carId": carId});
-      _favorite.add(FavoriteModel(id: doc.id, carId: carId));
+          .add({"carId": carId,"userId":userId});
+      _favorite.add(FavoriteModel(id: doc.id, carId: carId,userId:userId));
     }
 
     notifyListeners();
   }
 
   /// معرفة إذا السيارة مفضلة أو لا
-  bool isFavorite(String carId) {
-    return _favorite.any((f) => f.carId == carId);
+  bool isFavorite(String carId,String userId) {
+    return _favorite.any((f) => f.carId == carId && f.userId==userId);
   }
 }

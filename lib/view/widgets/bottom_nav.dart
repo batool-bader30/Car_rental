@@ -1,3 +1,4 @@
+import 'package:carrental/view/screens/BookimgHistory.dart';
 import 'package:carrental/view/screens/home_screen.dart';
 import 'package:carrental/view/screens/myprofile/profile.dart';
 import 'package:flutter/material.dart';
@@ -62,9 +63,17 @@ class CustomBottomNavBar extends StatelessWidget {
       ),
       SizedBox(width: 55.w),
 
-      Icon(Icons.history_outlined,
-          color: selectedIndex == 3 ? Colors.amber : Colors.white,
-          size: 30.h),
+      InkWell(
+         onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => BookingHistoryScreen()),
+          );
+        },
+        child: Icon(Icons.history_outlined,
+            color: selectedIndex == 3 ? Colors.amber : Colors.white,
+            size: 30.h),
+      ),
     ],
   ),
 );

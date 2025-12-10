@@ -5,6 +5,7 @@ import 'package:carrental/view/widgets/button.dart';
 import 'package:carrental/view/widgets/icons_widget.dart';
 import 'package:carrental/view/widgets/text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SuccessfulScreen extends StatelessWidget {
   final BookingModel bookingModel;
@@ -19,8 +20,8 @@ class SuccessfulScreen extends StatelessWidget {
             child: Image.asset(Assets.successfulScreen, fit: BoxFit.cover),
           ),
           Positioned(
-            left: 10,
-            top: 30,
+            left: 10.w,
+            top: 30.h,
             child: InkWell(
               onTap: () => Navigator.pop(context),
               child: IconWidget(icon: Icons.arrow_back),
@@ -28,31 +29,28 @@ class SuccessfulScreen extends StatelessWidget {
           ),
           Center(
             child: Padding(
-              padding: const EdgeInsets.all(22.0),
+              padding: EdgeInsets.all(22.w),
               child: Column(
                 children: [
-                  SizedBox(height: 130),
-
-                  BoldText(text: "Successful!", size: 40, color: Colors.white),
-                  SizedBox(height: 30),
-                  Image.asset(Assets.successicon, height: 120),
-                  SizedBox(height: 50),
+                  SizedBox(height: 130.h),
+                  BoldText(text: "Successful!", size: 40.sp, color: Colors.white),
+                  SizedBox(height: 30.h),
+                  Image.asset(Assets.successicon, height: 120.h),
+                  SizedBox(height: 50.h),
                   BoldText(
                     text: "${bookingModel.carName}",
                     color: Colors.white,
                   ),
-                  SizedBox(height: 5),
-
+                  SizedBox(height: 5.h),
                   MediumText(
                     text: " renting has been Successful!",
                     color: Colors.white,
                   ),
-                  SizedBox(height: 5),
-
+                  SizedBox(height: 5.h),
                   BoldText(
                     text: "Happy Riding.",
                     color: Colors.white,
-                    size: 22,
+                    size: 22.sp,
                   ),
                   Spacer(),
                   Button(
@@ -61,7 +59,7 @@ class SuccessfulScreen extends StatelessWidget {
                       NavigatorUtils.navigateToHomeScreen(context);
                     },
                   ),
-                  SizedBox(height: 15),
+                  SizedBox(height: 15.h),
                 ],
               ),
             ),

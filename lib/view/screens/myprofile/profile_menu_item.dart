@@ -16,14 +16,12 @@ class SettingsMenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: EdgeInsets.only(bottom: 16.h),
+        margin: EdgeInsets.only(bottom: 4.h),
         padding: EdgeInsets.symmetric(horizontal: 16.w),
-        width: screenWidth,
+        width: 1.sw, // ScreenUtil provides full screen width
         child: Column(
           children: [
             Padding(
@@ -32,23 +30,22 @@ class SettingsMenuItem extends StatelessWidget {
                 children: [
                   Image.asset(
                     image,
-                    width: 35.w,
+                    width: 33.w,
                   ),
                   SizedBox(width: 16.w),
                   SmallText(
                     text: text,
-                    size: 18.sp,
+                    size: 16.sp,
                   ),
                   Spacer(),
                   Icon(
                     Icons.arrow_forward_ios,
                     color: const Color.fromARGB(137, 49, 49, 49),
-                    size: 18.sp,
+                    size: 16.sp,
                   ),
                 ],
               ),
             ),
-           
           ],
         ),
       ),

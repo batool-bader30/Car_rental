@@ -1,7 +1,7 @@
 import 'package:carrental/models/booking_model.dart';
 import 'package:carrental/models/car_model.dart';
 import 'package:carrental/view/screens/Payment/paymentMethod_screen.dart';
-import 'package:carrental/view/screens/SuccessfulScreen.dart';
+import 'package:carrental/view/screens/Payment/SuccessfulScreen.dart';
 import 'package:carrental/view/screens/auth/login_page.dart';
 import 'package:carrental/view/screens/auth/reset_pass.dart';
 import 'package:carrental/view/screens/auth/signup_page.dart';

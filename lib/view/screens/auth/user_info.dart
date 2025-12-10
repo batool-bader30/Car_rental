@@ -3,7 +3,6 @@ import 'package:carrental/utils/constant/assets.dart';
 import 'package:carrental/utils/navigator_utils.dart';
 import 'package:carrental/utils/validations/validations_metod%20(1).dart';
 import 'package:carrental/view/widgets/button.dart';
-import 'package:carrental/view/widgets/pass_field.dart';
 import 'package:carrental/view/widgets/text.dart';
 import 'package:carrental/view/widgets/text_field.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +10,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 class userinfo extends StatelessWidget {
-  TextEditingController namecontroller = TextEditingController();
-  TextEditingController phonecontroller = TextEditingController();
+  userinfo({super.key});
+
+  final TextEditingController namecontroller = TextEditingController();
+  final TextEditingController phonecontroller = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -29,39 +30,39 @@ class userinfo extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: EdgeInsets.all(20.w),
                     child: BoldText(
                       text: "Sign Up",
-                      size: 30,
+                      size: 30.sp,
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 10.h),
                   Container(
-                    height: 530,
+                    height: 530.h,
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(201, 105, 104, 104),
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
+                        topLeft: Radius.circular(30.r),
+                        topRight: Radius.circular(30.r),
                       ),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(25.0),
+                      padding: EdgeInsets.all(25.w),
                       child: Form(
                         key: _formKey,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            SizedBox(height: 20),
+                            SizedBox(height: 20.h),
                             Padding(
-                              padding: const EdgeInsets.all(5.0),
+                              padding: EdgeInsets.all(5.w),
                               child: Align(
                                 alignment: Alignment.topLeft,
                                 child: SmallText(
                                   text: "user name",
                                   color: Colors.white,
-                                  size: 18,
+                                  size: 18.sp,
                                 ),
                               ),
                             ),
@@ -69,38 +70,39 @@ class userinfo extends StatelessWidget {
                               controller: namecontroller,
                               validator: ValidationsMetod.validateName,
                               labelText: "Enter Your Name",
-                              prefixIcon: Icon(Icons.person_outlined),
+                              prefixIcon: Icon(Icons.person_outlined, size: 24.sp),
                             ),
-                            SizedBox(height: 10),
+                            SizedBox(height: 10.h),
                             Padding(
-                              padding: const EdgeInsets.all(5.0),
+                              padding: EdgeInsets.all(5.w),
                               child: Align(
                                 alignment: Alignment.topLeft,
                                 child: SmallText(
                                   text: "phone number",
                                   color: Colors.white,
-                                  size: 18,
+                                  size: 18.sp,
                                 ),
                               ),
                             ),
-
                             MyTextField(
                               keyboardType: TextInputType.phone,
                               controller: phonecontroller,
                               validator: ValidationsMetod.validatePhoneNumber,
                               labelText: "Enter Your Phone Number",
-                              prefixIcon: Icon(Icons.call),
+                              prefixIcon: Icon(Icons.call, size: 24.sp),
                             ),
-                            SizedBox(height: 30.sp),
+                            SizedBox(height: 30.h),
                             Button(
                               title: "sign up",
+                              height: 50.h,
+                              width: 330.w,
                               ontap: () {
                                 if (_formKey.currentState!.validate()) {
                                   ctrl.saveUserData(
                                     name: namecontroller.text,
                                     phoneNumber: phonecontroller.text,
                                   );
-                                   NavigatorUtils.navigateToHomeScreen(context);
+                                  NavigatorUtils.navigateToHomeScreen(context);
                                 }
                               },
                             ),
@@ -118,8 +120,7 @@ class userinfo extends StatelessWidget {
                                 ),
                               ),
                             ),
-
-                            SizedBox(height: 30),
+                            SizedBox(height: 30.h),
                           ],
                         ),
                       ),

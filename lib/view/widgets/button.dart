@@ -22,17 +22,17 @@ class Button extends StatelessWidget {
       width: width!.w,
       child: Material(
         color: const Color(0xFFEBB739), // اللون ثابت
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(10.r),
         child: InkWell(
           onTap: ontap,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(10.r),
           child: Center(
             child: Text(
               title,
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
-                fontSize: 17,
+                fontSize: 17.sp,
               ),
             ),
           ),

@@ -11,8 +11,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 class SigninPage extends StatelessWidget {
-  TextEditingController passwordcontroller = TextEditingController();
-  TextEditingController emailcontroller = TextEditingController();
+  SigninPage({super.key});
+
+  final TextEditingController passwordcontroller = TextEditingController();
+  final TextEditingController emailcontroller = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -29,65 +31,62 @@ class SigninPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: EdgeInsets.all(20.w),
                     child: BoldText(
                       text: "Sign In",
-                      size: 30,
+                      size: 30.sp,
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(height: 10),
-
+                  SizedBox(height: 10.h),
                   Container(
-                    height: 530,
+                    height: 530.h,
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(201, 105, 104, 104),
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
+                        topLeft: Radius.circular(30.r),
+                        topRight: Radius.circular(30.r),
                       ),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(25.0),
+                      padding: EdgeInsets.all(25.w),
                       child: Form(
                         key: _formKey,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            SizedBox(height: 20),
-
+                            SizedBox(height: 20.h),
                             Padding(
-                              padding: const EdgeInsets.all(5.0),
+                              padding: EdgeInsets.all(5.w),
                               child: Align(
                                 alignment: Alignment.topLeft,
                                 child: SmallText(
                                   text: "E-mail",
                                   color: Colors.white,
-                                  size: 18,
+                                  size: 18.sp,
                                 ),
                               ),
                             ),
-
                             MyTextField(
                               controller: emailcontroller,
                               validator: ValidationsMetod.validateEmail,
                               labelText: "Enter Your Email",
-                              prefixIcon: Icon(Icons.email_outlined),
+                              prefixIcon: Icon(Icons.email_outlined, size: 24.sp),
                             ),
-                            SizedBox(height: 10),
+                            SizedBox(height: 10.h),
                             Padding(
-                              padding: const EdgeInsets.all(5.0),
+                              padding: EdgeInsets.all(5.w),
                               child: Align(
                                 alignment: Alignment.topLeft,
                                 child: SmallText(
-                                  text: "password",
+                                  text: "Password",
                                   color: Colors.white,
-                                  size: 18,
+                                  size: 18.sp,
                                 ),
                               ),
                             ),
                             MyPasswordField(
-                              prefixIcon: Icon(Icons.lock_outline),
+                              prefixIcon: Icon(Icons.lock_outline, size: 24.sp),
                               controller: passwordcontroller,
                               validator: ValidationsMetod.validatePassword,
                               labelText: "Enter Your Password",
@@ -97,27 +96,28 @@ class SigninPage extends StatelessWidget {
                                 NavigatorUtils.navigateToResetScreen(context);
                               },
                               child: Padding(
-                                padding: const EdgeInsets.all(7.0),
+                                padding: EdgeInsets.all(7.w),
                                 child: Align(
                                   alignment: Alignment.topRight,
                                   child: SmallText(
                                     text: "Forgot Password?",
                                     color: Colors.white,
-                                    size: 15,
+                                    size: 15.sp,
                                   ),
                                 ),
                               ),
                             ),
-                            SizedBox(height: 30.sp),
+                            SizedBox(height: 30.h),
                             Button(
                               title: "sign in",
-                              ontap: () async {         
+                              height: 50.h,
+                              width: 330.w,
+                              ontap: () async {
                                 if (_formKey.currentState!.validate()) {
                                   bool success = await ctrl.login(
                                     emailcontroller.text,
                                     passwordcontroller.text,
                                   );
-
                                   if (success) {
                                     NavigatorUtils.navigateToHomeScreen(context);
                                   } else {
@@ -142,9 +142,7 @@ class SigninPage extends StatelessWidget {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    NavigatorUtils.navigateToSignUpsScreen(
-                                      context,
-                                    );
+                                    NavigatorUtils.navigateToSignUpsScreen(context);
                                   },
                                   child: MediumText(
                                     text: "Sign up",
@@ -154,7 +152,7 @@ class SigninPage extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 30),
+                            SizedBox(height: 30.h),
                           ],
                         ),
                       ),

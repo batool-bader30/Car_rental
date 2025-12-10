@@ -8,6 +8,7 @@ import 'package:carrental/view/widgets/car_item.dart';
 import 'package:carrental/view/widgets/drawer.dart';
 import 'package:carrental/view/widgets/icons_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -23,11 +24,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-
-    // Fetch cars once when the screen is initialized
     Future.microtask(() async {
       await Provider.of<CarProvider>(context, listen: false).fetchCars();
-     
     });
   }
 
@@ -40,56 +38,48 @@ class _HomeScreenState extends State<HomeScreen> {
     String? imagePath = myuser?.image;
     ImageProvider profileImage;
 
-    if (imagePath != null &&
-        imagePath.isNotEmpty &&
-        File(imagePath).existsSync()) {
+    if (imagePath != null && imagePath.isNotEmpty && File(imagePath).existsSync()) {
       profileImage = FileImage(File(imagePath));
     } else {
       profileImage = AssetImage("assets/images/profileimag.png");
     }
 
     return Scaffold(
-drawer: AppDrawer(),
-  appBar: AppBar(
-    backgroundColor: AppColor.primary,
-    elevation: 0,
-    leading: Builder(
-      builder: (context) => InkWell(
-       child:  Padding(
-         padding: const EdgeInsets.all(8.0),
-         child: IconWidget(icon: Icons.menu),
-       ),
-        onTap: () => Scaffold.of(context).openDrawer(),
+      drawer: AppDrawer(),
+      appBar: AppBar(
+        backgroundColor: AppColor.primary,
+        elevation: 0,
+        leading: Builder(
+          builder: (context) => InkWell(
+            child: Padding(
+              padding: EdgeInsets.all(8.h),
+              child: IconWidget(icon: Icons.menu),
+            ),
+            onTap: () => Scaffold.of(context).openDrawer(),
+          ),
+        ),
+        actions: [
+          CircleAvatar(radius: 20.r, backgroundImage: profileImage),
+          SizedBox(width: 16.w),
+        ],
       ),
-    ),
-    actions: [
-      CircleAvatar(radius: 20, backgroundImage: profileImage),
-      SizedBox(width: 16),
-    ],
-  ),      bottomNavigationBar: CustomBottomNavBar(selectedIndex: 0),
+      bottomNavigationBar: CustomBottomNavBar(selectedIndex: 0),
       backgroundColor: AppColor.primary,
       body: SafeArea(
-        
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              
-              
-
-              const SizedBox(height: 10),
-
-              const Text(
+              SizedBox(height: 10.h),
+              Text(
                 "Browse Cars",
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold),
               ),
-
-              const SizedBox(height: 12),
-
+              SizedBox(height: 12.h),
               /// CATEGORIES
               SizedBox(
-                height: 38,
+                height: 38.h,
                 child: Consumer<CarProvider>(
                   builder: (context, ctrl, child) {
                     return ListView.builder(
@@ -100,7 +90,6 @@ drawer: AppDrawer(),
                         return InkWell(
                           onTap: () {
                             ctrl.changeSelectedIndex(index);
-
                             if (categories[index] == "All") {
                               ctrl.fetchCars();
                             } else {
@@ -108,28 +97,19 @@ drawer: AppDrawer(),
                             }
                           },
                           child: Container(
-                            margin: EdgeInsets.symmetric(horizontal: 4),
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 20,
-                              vertical: 10,
-                            ),
+                            margin: EdgeInsets.symmetric(horizontal: 4.w),
+                            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
                             decoration: BoxDecoration(
-                              color: isSelected
-                                  ? Color(0xFF1C2A3A)
-                                  : Colors.white,
-                              borderRadius: BorderRadius.circular(10),
+                              color: isSelected ? Color(0xFF1C2A3A) : Colors.white,
+                              borderRadius: BorderRadius.circular(10.r),
                             ),
                             child: Center(
                               child: Text(
                                 categories[index],
                                 style: TextStyle(
-                                  fontSize: 16,
-                                  color: isSelected
-                                      ? Color(0xffEBB739)
-                                      : Colors.black,
-                                  fontWeight: isSelected
-                                      ? FontWeight.bold
-                                      : FontWeight.normal,
+                                  fontSize: 16.sp,
+                                  color: isSelected ? Color(0xffEBB739) : Colors.black,
+                                  fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                                 ),
                               ),
                             ),
@@ -140,51 +120,44 @@ drawer: AppDrawer(),
                   },
                 ),
               ),
-
-              SizedBox(height: 20),
-
+              SizedBox(height: 20.h),
               /// HEADER + FILTER BUTTON
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     "Available Cars",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                    style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600),
                   ),
                   IconButton(
                     onPressed: () {
-            carProvider.sort();
-
+                      carProvider.sort();
                     },
                     icon: Row(
                       children: [
-                        Text("price"),
-                       Icon(
-        carProvider.isAscending 
-          ? Icons.arrow_upward 
-          : Icons.arrow_downward,
-        color: Colors.black,
-        size: 18,
-      ),
+                        Text("price", style: TextStyle(fontSize: 14.sp)),
+                        Icon(
+                          carProvider.isAscending ? Icons.arrow_upward : Icons.arrow_downward,
+                          color: Colors.black,
+                          size: 18.sp,
+                        ),
                       ],
                     ),
                   ),
                 ],
               ),
-
-              SizedBox(height: 12),
-
+              SizedBox(height: 12.h),
               /// CAR LIST
               Expanded(
                 child: ListView.builder(
-                        itemCount: cars.length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: EdgeInsets.only(bottom: 12),
-                            child: CarItem(car: cars[index]),
-                          );
-                        },
-                      ),
+                  itemCount: cars.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.only(bottom: 12.h),
+                      child: CarItem(car: cars[index]),
+                    );
+                  },
+                ),
               ),
             ],
           ),

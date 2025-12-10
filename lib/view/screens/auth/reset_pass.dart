@@ -10,7 +10,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 class ResetPass extends StatelessWidget {
-  TextEditingController emailcontroller = TextEditingController();
+  ResetPass({super.key});
+
+  final TextEditingController emailcontroller = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -22,113 +24,106 @@ class ResetPass extends StatelessWidget {
           return Stack(
             children: [
               Image.asset(Assets.backgroungimage, fit: BoxFit.fill),
-                  Container(
-                    height: MediaQuery.of(context).size.height,
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(201, 105, 104, 104),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(25.0),
-                      child: Form(
-                        key: _formKey,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                                SizedBox(height: 30),
-
-                             Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: SmallText(
-                                  text:"Reset password",
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  size: 22,
-                                ),
-                              ),
+              Container(
+                height: MediaQuery.of(context).size.height,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(201, 105, 104, 104),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(25.w),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(height: 30.h),
+                        Padding(
+                          padding: EdgeInsets.all(12.w),
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: SmallText(
+                              text: "Reset password",
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              size: 22.sp,
                             ),
-                            SizedBox(height: 100),
-
-                            Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: SmallText(
-                                  text:"Enter your email to receive a password reset link.",
-                                  color: Colors.white,
-                                  size: 18,
-                                ),
-                              ),
-                            ),
-
-                            MyTextField(
-                              controller: emailcontroller,
-                              validator: ValidationsMetod.validateEmail,
-                              labelText: "Enter Your Email",
-                              prefixIcon: Icon(Icons.email_outlined),
-                            ),
-                            SizedBox(height: 10),
-                           
-                            SizedBox(height: 30.sp),
-                            Button(
-                              title: "send link",
-                              ontap: () async {
-                                if (_formKey.currentState!.validate()) {
-                                  final result = await ctrl.sendPasswordReset(
-                                    emailcontroller.text,
-                                  );
-                                  if (result==true) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        content: Text(
-                                          "send successfully",
-                                        ),
-                                        backgroundColor: Color.fromARGB(255, 126, 126, 126),
-                                        duration: Duration(seconds: 5),
-                                      ),
-                                    );
-                                    NavigatorUtils.navigateToLoginScreen(
-                                      context,
-                                    );
-                                  } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        content: Text(
-                                          "email not found",
-                                        ),
-                                        backgroundColor: Colors.red,
-                                        duration: Duration(seconds: 5),
-                                      ),
-                                    );
-                                   
-                                  }
-                                }
-                              },
-                            ),
-
-                            Spacer(),
-                           
-                                InkWell(
-                                  onTap: () {
-                                    NavigatorUtils.navigateToLoginScreen(
-                                      context,
-                                    );
-                                  },
-                                  child: MediumText(
-                                    text: "back",
-                                    color: const Color(0xFFEBB739),
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                           
-                            SizedBox(height: 30),
-                          ],
+                          ),
                         ),
-                      ),
+                        SizedBox(height: 100.h),
+                        Padding(
+                          padding: EdgeInsets.all(5.w),
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: SmallText(
+                              text: "Enter your email to receive a password reset link.",
+                              color: Colors.white,
+                              size: 18.sp,
+                            ),
+                          ),
+                        ),
+                        MyTextField(
+                          controller: emailcontroller,
+                          validator: ValidationsMetod.validateEmail,
+                          labelText: "Enter Your Email",
+                          prefixIcon: Icon(Icons.email_outlined, size: 24.sp),
+                        ),
+                        SizedBox(height: 10.h),
+                        SizedBox(height: 30.h),
+                        Button(
+                          title: "send link",
+                          height: 50.h,
+                          width: 330.w,
+                          ontap: () async {
+                            if (_formKey.currentState!.validate()) {
+                              final result = await ctrl.sendPasswordReset(
+                                emailcontroller.text,
+                              );
+                              if (result == true) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                      "send successfully",
+                                    ),
+                                    backgroundColor: Color.fromARGB(255, 126, 126, 126),
+                                    duration: Duration(seconds: 5),
+                                  ),
+                                );
+                                NavigatorUtils.navigateToLoginScreen(
+                                  context,
+                                );
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                      "email not found",
+                                    ),
+                                    backgroundColor: Colors.red,
+                                    duration: Duration(seconds: 5),
+                                  ),
+                                );
+                              }
+                            }
+                          },
+                        ),
+                        Spacer(),
+                        InkWell(
+                          onTap: () {
+                            NavigatorUtils.navigateToLoginScreen(
+                              context,
+                            );
+                          },
+                          child: MediumText(
+                            text: "back",
+                            color: const Color(0xFFEBB739),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 30.h),
+                      ],
                     ),
-                 
+                  ),
+                ),
               ),
             ],
           );
@@ -137,5 +132,3 @@ class ResetPass extends StatelessWidget {
     );
   }
 }
-
-
