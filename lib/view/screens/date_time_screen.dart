@@ -56,20 +56,25 @@ class _DateTimeScreenState extends State<DateTimeScreen> {
           children: [
             Padding(
               padding: EdgeInsets.all(10.w),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  InkWell(
-                    onTap: () => Navigator.pop(context),
-                    child: IconWidget(icon: Icons.arrow_back),
-                  ),
-                  Text(
-                    "Date & Time",
-                    style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
-                  ),
-                  IconWidget(icon: Icons.favorite_border),
-                ],
-              ),
+              child: Stack(
+  alignment: Alignment.center,
+  children: [
+    Align(
+      alignment: Alignment.centerLeft,
+      child: InkWell(
+        onTap: () => Navigator.pop(context),
+        child: IconWidget(icon: Icons.arrow_back),
+      ),
+    ),
+    Center(
+      child: Text(
+        "Date & Time",
+        style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
+      ),
+    ),
+  ],
+),
+
             ),
             SizedBox(height: 20.h),
             Container(
